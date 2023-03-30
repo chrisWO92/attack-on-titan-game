@@ -23,11 +23,15 @@ body {
   padding: 5vh;
   height: auto;
   width: 100vw;
-  background-color: aqua;
 }
 
 h2 {
+    width: 40%;
     font-size: 5vh;
     text-align: center;
     padding: 4vh;
+    margin: 4vh auto;
+    color: white;
+    border-radius: 1rem;
+    backdrop-filter: blur(45px);
 }
