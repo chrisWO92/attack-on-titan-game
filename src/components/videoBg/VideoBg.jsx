@@ -5,7 +5,7 @@ import Video from '../../assets/videoBg.mp4'
 const Videobg = () => {
   return (
     <div id="header-bg">
-      <video src={Video} autoplay='autoplay' muted loop type="video/mp4" id='video-bg'/>
+      <video src={Video} autoPlay='autoplay' muted loop type="video/mp4" id='video-bg'/>
     </div>
   )
 }
