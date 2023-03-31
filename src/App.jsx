@@ -18,49 +18,97 @@ const characters = [
     id: "0",
     name: "Attack on Titan",
     picture: IMG1,
-    atacks: ["atack1", "atack2", "atack3"]
+    attacks: [
+      {id: 0, name: 'Melee Fight', power: 8},
+      {id: 1, name: 'Intelligence', power: 7},
+      {id: 2, name: 'Strength', power: 8},
+      {id: 3, name: 'Stamina', power: 10},
+      {id: 4, name: 'Hardening', power: 10}
+    ]
   },
   {
     id: "1",
     name: "Female Titan",
     picture: IMG2,
-    atacks: ["atack1", "atack2", "atack3"]
+    attacks: [
+      {id: 0, name: 'Melee Fight', power: 9},
+      {id: 1, name: 'Intelligence', power: 8},
+      {id: 2, name: 'Strength', power: 7},
+      {id: 3, name: 'Armor', power: 7},
+      {id: 4, name: 'Scream Suicide', power: 10}
+    ]
   },
   {
     id: "2",
     name: "Armored Titan",
     picture: IMG3,
-    atacks: ["atack1", "atack2", "atack3"]
+    attacks: [
+      {id: 0, name: 'Melee Fight', power: 7},
+      {id: 1, name: 'Intelligence', power: 6},
+      {id: 2, name: 'Strength', power: 9},
+      {id: 3, name: 'Armor', power: 9},
+      {id: 4, name: 'Armored Assault', power: 10}
+    ]
   },
   {
     id: "3",
     name: "Colossal Titan",
     picture: IMG4,
-    atacks: ["atack1", "atack2", "atack3"]
+    attacks: [
+      {id: 0, name: 'Destruction', power: 7},
+      {id: 1, name: 'Intelligence', power: 5},
+      {id: 2, name: 'Strength', power: 8},
+      {id: 3, name: 'Hot Steam', power: 9},
+      {id: 4, name: 'Blast Attack', power: 10}
+    ]
   },
   {
     id: "4",
     name: "Beast Titan",
     picture: IMG5,
-    atacks: ["atack1", "atack2", "atack3"]
+    attacks: [
+      {id: 0, name: 'Melee fight', power: 7},
+      {id: 1, name: 'Intelligence', power: 9},
+      {id: 2, name: 'Strength', power: 7},
+      {id: 3, name: 'Titan Control', power: 9},
+      {id: 4, name: 'Stones', power: 10}
+    ]
   },
   {
     id: "5",
     name: "War Hammer Titan",
     picture: IMG6,
-    atacks: ["atack1", "atack2", "atack3"]
+    attacks: [
+      {id: 0, name: 'Melee fight', power: 8},
+      {id: 1, name: 'Intelligence', power: 6},
+      {id: 2, name: 'Strength', power: 8},
+      {id: 3, name: 'Armored Weapons', power: 10},
+      {id: 4, name: 'Tine Attack ', power: 10}
+    ]
   },
   {
     id: "6",
     name: "Jaw Titan",
     picture: IMG7,
-    atacks: ["atack1", "atack2", "atack3"]
+    attacks: [
+      {id: 0, name: 'Melee fight', power: 7},
+      {id: 1, name: 'Speed', power: 9},
+      {id: 2, name: 'Strength', power: 5},
+      {id: 3, name: 'Claws', power: 9},
+      {id: 4, name: 'Jaw Attack', power: 9}
+    ]
   },
   {
     id: "7",
     name: "Cart Titan",
     picture: IMG8,
-    atacks: ["atack1", "atack2", "atack3"]
+    attacks: [
+      {id: 0, name: 'Melee fight', power: 6},
+      {id: 1, name: 'Speed', power: 8},
+      {id: 2, name: 'Stamina', power: 8},
+      {id: 3, name: 'Intelligence', power: 8},
+      {id: 4, name: 'Amo Attack', power: 9}
+    ]
   },
 ]
 
@@ -69,7 +117,7 @@ function App() {
   const [character, setCharacter] = useState('');
   const [selected, setSelected] = useState(false);
   const [charShowing, setCharShowing] = useState(true);
-  const [charAtacks, setCharAtacks] = useState([]);
+  const [charAttacks, setCharAttacks] = useState([]);
 
   useEffect(() => {
     console.log(character)
@@ -86,8 +134,8 @@ function App() {
   return (
     <>
       <VideoBg />
-      <Characters characters={characters} character={character} setCharacter={setCharacter} setSelected={setSelected} charShowing={charShowing} charactersHidding={charactersHidding} setCharAtacks={setCharAtacks}/>
-      <Attacks characters={characters} charShowing={charShowing} charAtacks={charAtacks}/>
+      <Characters characters={characters} character={character} setCharacter={setCharacter} setSelected={setSelected} charShowing={charShowing} charactersHidding={charactersHidding} setCharAttacks={setCharAttacks}/>
+      <Attacks characters={characters} charShowing={charShowing} charAttacks={charAttacks} character={character}/>
       <p style={{display: 'none'}}>
       Tengo que desarrollar un juego en el que se puedan seleccionar unos personajes (en principio tres). Estos personajes tienen un nombre, una imágen y una cantidad de ataques determinada según su "naturaleza". Los personajes deben aparecer en pantalla en forma de tarjetas clickeables (puede funcionar un input con radio buttons, pero sin los radios, sólo los labels), y al hacer click en alguna y hacer click en submit, deben aparecer en pantalla los ataques disponibles de ese personaje (5 en total), para que el usuario elija el orden en que quiere usar estos 5 ataques. Luego, de forma automática se elegirá el personaje del enemigo y el orden de sus ataques, para luego enfrentar por orden cada ataque. En este sentido, el jugador (usuario o máquina) que haya tenido más victorias, será el ganador y la app deberá mostrar un mensaje en consecuencia. 
       </p>

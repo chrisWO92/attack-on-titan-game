@@ -3,24 +3,24 @@ import "./characters.css";
 
 import Card from "../card/Card";
 
-const Characters = ({ characters, character, setCharacter, setSelected, charShowing, charactersHidding, setCharAtacks }) => {
+const Characters = ({ characters, character, setCharacter, setSelected, charShowing, charactersHidding, setCharAttacks }) => {
   return (
     <>
       <div className={charShowing ? "" : "displayNone"}>
         <h2>Select Your Titan</h2>
         <div id="characters">
           {characters &&
-            characters.map(({ id, name, picture, atacks }) => {
+            characters.map(({ id, name, picture, attacks }) => {
               return (
                 <Card
                   key={id}
                   name={name}
                   picture={picture}
-                  atacks={atacks}
+                  attacks={attacks}
                   setCharacter={setCharacter}
                   character={character}
                   setSelected={setSelected}
-                  setCharAtacks={setCharAtacks}
+                  setCharAttacks={setCharAttacks}
                 />
               );
             })}

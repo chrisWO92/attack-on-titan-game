@@ -1,11 +1,11 @@
 import React from "react";
 import "./card.css";
 
-const Card = ({ name, picture, atacks, setCharacter, character, setSelected, setCharAtacks }) => {
+const Card = ({ name, picture, attacks, setCharacter, character, setSelected, setCharAttacks }) => {
     const characterSelection = () => {
         setCharacter(name)
         setSelected(true)
-        setCharAtacks(atacks)
+        setCharAttacks(attacks)
     }
   return (
     <>
