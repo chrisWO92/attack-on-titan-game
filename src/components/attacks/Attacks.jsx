@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './attacks.css'
 
+const selectionArray = [];
+
 const Attacks = ({charShowing, charAttacks, character}) => {
 
     const [attackSelected0, setAttackSelected0] = useState(false);
@@ -12,6 +14,14 @@ const Attacks = ({charShowing, charAttacks, character}) => {
     const arrayAttackSelected = [attackSelected0, attackSelected1, attackSelected2, attackSelected3, attackSelected4];
     const arraySetAttackSelected = [setAttackSelected0, setAttackSelected1, setAttackSelected2, setAttackSelected3, setAttackSelected4];
 
+    
+
+    const clickHandler = (id, name, power) => {
+        arraySetAttackSelected[id](!arrayAttackSelected[id])
+        selectionArray.push({name, power})
+        console.log(selectionArray)
+    }
+
   return (
     <div className={charShowing ? "displayNone" : ""}>
       <h3>Character: {character}</h3>
@@ -20,7 +30,7 @@ const Attacks = ({charShowing, charAttacks, character}) => {
           {charAttacks &&
             charAttacks.map(({id, name, power}) => {
               return (
-                <li key={id} onClick={() => arraySetAttackSelected[id](!arrayAttackSelected[id])} className={arrayAttackSelected[id] ? `blue` : ''}>{name}: {power}</li>
+                <li key={id} onClick={() => clickHandler(id, name, power)} className={arrayAttackSelected[id] ? `blue` : ''}>{name}: {power}</li>
               );
             })}
         </ul>

@@ -83,7 +83,7 @@ const characters = [
       {id: 1, name: 'Intelligence', power: 6},
       {id: 2, name: 'Strength', power: 8},
       {id: 3, name: 'Armored Weapons', power: 10},
-      {id: 4, name: 'Tine Attack ', power: 10}
+      {id: 4, name: 'Tines Attack ', power: 10}
     ]
   },
   {
