@@ -17,8 +17,8 @@
   margin: 0 auto;
 }
 
-h3 {
-  margin: 2vh 0 3vh;
+.result-title-string {
+  margin: 1vh 0 2vh;
   width: 100%;
   text-align: center;
   padding: 0;

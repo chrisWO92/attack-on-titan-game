@@ -59,7 +59,7 @@ const Result = ({
       <h2 className={enemyCharacterSelected ? "match-title" : "displayNone"}>MATCH RESULTS</h2>
       <div id="result" className={enemyCharacterSelected ? "displayFlex" : "displayNone"}>
         <ul id="user-attacks">
-        <h3>You: {character}</h3>
+        <h3 className="result-title-string">You: {character}</h3>
           {selectionArray &&
             selectionArray.map(({ id, name, power }) => {
               return (
@@ -70,14 +70,14 @@ const Result = ({
             })}
         </ul>
         <ul id="individual-results">
-        <h3>Results:</h3>
+        <h3 className="result-title-string">Results:</h3>
           {results &&
             results[0].map(({ id, matchResult }) => {
               return <li key={id} className="win-or-lose">{matchResult}</li>;
             })}
         </ul>
         <ul id="enemy-attacks">
-        <h3>Enemy: {enemyName}</h3>
+        <h3 className="result-title-string">Enemy: {enemyName}</h3>
           {enemyAttacks &&
             enemyAttacks.map(({ id, name, power }) => {
               return (
