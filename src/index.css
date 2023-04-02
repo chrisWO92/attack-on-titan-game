@@ -25,28 +25,6 @@ body {
   width: 100vw;
 }
 
-h2 {
-    width: 40%;
-    font-size: 5vh;
-    text-align: center;
-    padding: 4vh;
-    margin: 4vh auto;
-    color: white;
-    border-radius: 1rem;
-    backdrop-filter: blur(45px);
-}
-
-h3 {
-  width: 30%;
-  font-size: 3vh;
-  text-align: center;
-  padding: 2.5vh;
-  margin: 2vh auto;
-  color: white;
-  border-radius: 0.6rem;
-  backdrop-filter: blur(100px);
-}
-
 h4 {
   width: 20%;
   font-size: 2vh;

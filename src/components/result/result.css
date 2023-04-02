@@ -2,84 +2,97 @@
 /*==============GENERAL DESKTOP=============*/
 
 .displayFlex {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 3vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3vh;
 }
 
 .displayNone {
-    display: none;
+  display: none;
 }
 
 #result {
-    width: 80%;
-    margin: 0 auto;
+  width: 80%;
+  margin: 0 auto;
 }
 
 h3 {
-    margin: 2vh 0 3vh;
-    width: 100%;
-    text-align: center;
-    padding: 0;
-    font-size: 2.4vh;
+  margin: 2vh 0 3vh;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  font-size: 2.4vh;
 }
 
-ul {
-    width: 30%;
-    font-size: 2vh;
+.match-title, .message-result, .wins-and-loses {
+    width: 61%;
+    font-size: 3vh;
     text-align: center;
     padding: 2vh;
-    margin: 2vh 0 2vh 0;
+    margin: 1vh auto;
     color: white;
-    border-radius: 0.6rem;
-    backdrop-filter: blur(100px);
+    border-radius: 1rem;
+    background: rgba(204, 69, 32, 0.8);
+    backdrop-filter: blur(7px);
+}
+
+.wins-and-loses {
+    font-size: 2vh;
+    padding: 1vh;
+}
+
+#user-attacks,
+#enemy-attacks,
+#individual-results {
+  width: 30%;
+  font-size: 2vh;
+  text-align: center;
+  padding: 2vh;
+  margin: 2vh 0 2vh 0;
+  color: white;
+  border-radius: 0.6rem;
+  background: rgba(204, 69, 32, 0.3);
+  backdrop-filter: blur(100px);
+}
+
+.user-attack,
+.enemy-attack {
+  margin: 2vh;
+  padding: 1vh;
+  border-radius: 0.7rem;
+  background: rgba(58, 77, 180, 0.8);
 }
 
 #individual-results {
-    width: 12%;
+  width: 12%;
+  background: rgba(58, 77, 180, 0.5);
 }
 
 .win-or-lose {
-    margin: 2vh;
-    padding: 1vh;
-    border-radius: 0.7rem;
-    background-color: red;
-    cursor: pointer;
+  margin: 2vh;
+  padding: 1vh;
+  border-radius: 0.7rem;
+  background: rgba(204, 69, 32, 0.9);
+  cursor: pointer;
 }
 
 /*========== BIG NOTEBOOKS ===========*/
 @media screen and (max-width: 1300px) and (orientation: landscape) {
-    
-
 }
-
 
 /*========== SMALL NOTEBOOKS ===========*/
 @media screen and (max-width: 1050px) and (orientation: landscape) {
-
-
 }
-
-
 
 /*========== BIG TABLETS ===========*/
 @media screen and (max-width: 1400px) and (orientation: portrait) {
-
-
-
 }
 
 /*========== SMALL TABLETS ===========*/
-@media screen and (max-width: 820px)and (orientation: portrait) {
-    
-
-
+@media screen and (max-width: 820px) and (orientation: portrait) {
 }
 
 /*========== SMARTPHONES ===========*/
 @media screen and (max-width: 420px) and (orientation: portrait) {
-
-
-
 }

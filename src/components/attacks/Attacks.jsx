@@ -73,8 +73,8 @@ const Attacks = ({
             : "attacksFlex"
         }
       >
-        <h3>You: {character}</h3>
-        <h4>Select your attacks:</h4>
+        <h3 className="name-selection">You: {character}</h3>
+        <h4 className="attacks-title">Select your attacks:</h4>
         <ul id="attacks">
           {charAttacks &&
             charAttacks.map(({ id, name, power }) => {
@@ -82,7 +82,7 @@ const Attacks = ({
                 <li
                   key={id}
                   onClick={() => clickHandler(id, name, power)}
-                  className={arrayAttackSelected[id] ? `blue` : ""}
+                  className={arrayAttackSelected[id] ? `selected-attack` : "titan-attack"}
                 >
                   {name}: {power}
                 </li>

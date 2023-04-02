@@ -1,11 +1,54 @@
 /*=============GENERAL DESKTOP============*/
 
 #characters {
-    width: 100%;
-    height: auto;
+    width: 90%;
+    height: 60%;
+    padding: 2vh 2vh;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    row-gap: 3vh;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 48% 48%;
+    row-gap: 4%;
+    overflow: hidden;
+}
+
+.characters-container {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    column-gap: 10vh;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-title {
+    width: 40%;
+    font-size: 3vh;
+    text-align: center;
+    padding: 2vh;
+    margin: 4vh auto;
+    color: white;
+    border-radius: 1rem;
+    background: rgba(204, 69, 32, 0.6);
+    backdrop-filter: blur(7px);
+}
+
+#continue {
+    margin: 5vh auto 1vh;
+    font-size: 3vh;
+    display: block;
+    padding: 2vh 5vh;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    background: rgba(204, 69, 32, 0.9);
+    color: white;
+    transition: 0.3s;
+}
+
+#continue:hover {
+    box-sizing: border-box;
+    transform: scale(1.1);
 }
 
 /*----------------- MEDIA QUERIES ------------------*/

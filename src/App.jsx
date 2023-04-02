@@ -3,6 +3,7 @@ import "./App.css";
 import Attacks from "./components/attacks/Attacks";
 import Characters from "./components/characters/Characters";
 import VideoBg from "./components/videoBg/VideoBg";
+import ImageBg from "./components/imageBg/ImageBg";
 
 import IMG1 from "./assets/attack-on-titan.png";
 import IMG2 from "./assets/female-titan.png";
@@ -121,29 +122,29 @@ function App() {
   const [enemyCharacterSelected, setEnemyCharacterSelected] = useState(false);
   const [enemy, setEnemy] = useState(null);
   const [enemyIndex, setEnemyIndex] = useState(null);
-  const [enemyName, setEnemyName] = useState('');
+  const [enemyName, setEnemyName] = useState("");
   const [enemyAttacks, setEnemyAttacks] = useState([]);
 
   const [selectionArray, setSelectionArray] = useState([]);
   const [matchAttacks, setMatchAttacks] = useState([]);
 
   useEffect(() => {
-    console.log(enemy)
-    console.log(enemyIndex)
-    console.log(enemyName)
-    console.log(enemyAttacks)
-    console.log(selectionArray)
-  }, [enemy, enemyIndex, enemyAttacks, selectionArray])
+    console.log(enemy);
+    console.log(enemyIndex);
+    console.log(enemyName);
+    console.log(enemyAttacks);
+    console.log(selectionArray);
+  }, [enemy, enemyIndex, enemyAttacks, selectionArray]);
 
   const charactersHidding = () => {
     if (selected) {
       setCharShowing(false);
     }
-  }
+  };
 
   const randomIntFromInterval = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
-  }
+  };
 
   const getEnemyCharacter = () => {
     const index = randomIntFromInterval(0, characters.length - 1);
@@ -151,12 +152,17 @@ function App() {
     setEnemyIndex(index);
     setEnemy(characters[index]);
     setEnemyName(characters[index].name);
-    setEnemyAttacks(characters[index].attacks.map(value => ({value, sort: Math.random()})).sort((a, b) => a.sort - b.sort).map(({value}) => value));
-  }
+    setEnemyAttacks(
+      characters[index].attacks
+        .map((value) => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value)
+    );
+  };
 
   return (
     <>
-      <VideoBg />
+      <ImageBg />
       <Characters
         characters={characters}
         character={character}
@@ -195,23 +201,8 @@ function App() {
         matchAttacks={matchAttacks}
         character={character}
       />
-      <p style={{ display: "none" }}>
-        Tengo que desarrollar un juego en el que se puedan seleccionar unos
-        personajes (en principio tres). Estos personajes tienen un nombre, una
-        imágen y una cantidad de ataques determinada según su "naturaleza". Los
-        personajes deben aparecer en pantalla en forma de tarjetas clickeables
-        (puede funcionar un input con radio buttons, pero sin los radios, sólo
-        los labels), y al hacer click en alguna y hacer click en submit, deben
-        aparecer en pantalla los ataques disponibles de ese personaje (5 en
-        total), para que el usuario elija el orden en que quiere usar estos 5
-        ataques. Luego, de forma automática se elegirá el personaje del enemigo
-        y el orden de sus ataques, para luego enfrentar por orden cada ataque.
-        En este sentido, el jugador (usuario o máquina) que haya tenido más
-        victorias, será el ganador y la app deberá mostrar un mensaje en
-        consecuencia.
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
