@@ -1,16 +1,15 @@
 /*----------------- MEDIA QUERIES ------------------*/
 
-#continue {
-    margin: 10vh auto 5vh;
-    font-size: 3.5vh;
-    display: block;
-    padding: 3vh 6vh;
-    border-radius: 0.8rem;
-    cursor: pointer;
-}
-
 .displayNone {
     display: none;
+}
+
+#app {
+    margin: 0;
+    padding: 5vh;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
 }
 
 /*========== BIG NOTEBOOKS ===========*/
@@ -31,7 +30,12 @@
 /*========== BIG TABLETS ===========*/
 @media screen and (max-width: 1400px) and (orientation: portrait) {
 
-
+    #app {
+        margin: 0;
+        padding: 1vh;
+        height: auto;
+        width: 100%;
+    }
 
 }
 
