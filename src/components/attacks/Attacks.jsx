@@ -70,7 +70,7 @@ const Attacks = ({
             ? "displayNone"
             : enemyCharacterSelected
             ? "displayNone"
-            : ""
+            : "attacksFlex"
         }
       >
         <h3>You: {character}</h3>

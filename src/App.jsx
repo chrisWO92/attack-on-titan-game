@@ -121,6 +121,7 @@ function App() {
   const [enemyCharacterSelected, setEnemyCharacterSelected] = useState(false);
   const [enemy, setEnemy] = useState(null);
   const [enemyIndex, setEnemyIndex] = useState(null);
+  const [enemyName, setEnemyName] = useState('');
   const [enemyAttacks, setEnemyAttacks] = useState([]);
 
   const [selectionArray, setSelectionArray] = useState([]);
@@ -129,6 +130,7 @@ function App() {
   useEffect(() => {
     console.log(enemy)
     console.log(enemyIndex)
+    console.log(enemyName)
     console.log(enemyAttacks)
     console.log(selectionArray)
   }, [enemy, enemyIndex, enemyAttacks, selectionArray])
@@ -148,6 +150,7 @@ function App() {
     setEnemyCharacterSelected(true);
     setEnemyIndex(index);
     setEnemy(characters[index]);
+    setEnemyName(characters[index].name);
     setEnemyAttacks(characters[index].attacks.map(value => ({value, sort: Math.random()})).sort((a, b) => a.sort - b.sort).map(({value}) => value));
   }
 
@@ -180,6 +183,8 @@ function App() {
         setSelectionArray={setSelectionArray}
       />
       <Result
+        enemy={enemy}
+        enemyName={enemyName}
         enemyIndex={enemyIndex}
         setEnemyIndex={setEnemyIndex}
         enemyCharacterSelected={enemyCharacterSelected}
@@ -188,6 +193,7 @@ function App() {
         enemyAttacks={enemyAttacks}
         selectionArray={selectionArray}
         matchAttacks={matchAttacks}
+        character={character}
       />
       <p style={{ display: "none" }}>
         Tengo que desarrollar un juego en el que se puedan seleccionar unos

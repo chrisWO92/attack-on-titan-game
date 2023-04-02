@@ -4,6 +4,13 @@
     display: none;
 }
 
+.attacksFlex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 ul {
     width: 30%;
     font-size: 3vh;
