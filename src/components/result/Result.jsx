@@ -1,7 +1,11 @@
 import React from "react";
 import "./result.css";
 
-const Result = ({enemyCharacterSelected}) => {
+const Result = ({enemyCharacterSelected, enemyIndex, setEnemyIndex, characters, enemyAttacks, selectionArray, matchAttacks}) => {
+
+    
+
+
   return (
     <>
       <div
@@ -11,7 +15,9 @@ const Result = ({enemyCharacterSelected}) => {
             : "displayNone"
         }
       >
-        Result
+        <button onClick={() => console.log(matchAttacks)}>Logging attacks</button>
+        <div></div>
+        <div></div>
       </div>
     </>
   );
