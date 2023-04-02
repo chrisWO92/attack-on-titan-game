@@ -55,27 +55,12 @@ const Attacks = ({
     setAttackSelected4,
   ];
 
-  const randomEnemyAttacks = enemyAttacks.map(value => ({value, sort: Math.random()})).sort((a, b) => a.sort - b.sort).map(({value}) => value)
-
-  const match = () => {
-    let array = []
-    for (let i = 0; i < randomEnemyAttacks.length; i++){
-      array.push([selectionArray[i], randomEnemyAttacks[i]])
-    }
-    return array
-  }
-
   const clickHandler = (id, name, power) => {
-    arraySetAttackSelected[id](!arrayAttackSelected[id]);
-    selecArray.push({ name, power });
-    setSelectionArray(selecArray);
-    if (selecArray.length === 5){
-      setMatchAttacks(match())
-    }
-    console.log(matchAttacks)
+    arraySetAttackSelected[id](!arrayAttackSelected[id])
+    selecArray.push({ id, name, power })
+    setSelectionArray(selecArray)
   };
 
-  
 
   return (
     <>

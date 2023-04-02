@@ -119,6 +119,7 @@ function App() {
   const [charShowing, setCharShowing] = useState(true);
   const [charAttacks, setCharAttacks] = useState([]);
   const [enemyCharacterSelected, setEnemyCharacterSelected] = useState(false);
+  const [enemy, setEnemy] = useState(null);
   const [enemyIndex, setEnemyIndex] = useState(null);
   const [enemyAttacks, setEnemyAttacks] = useState([]);
 
@@ -126,41 +127,29 @@ function App() {
   const [matchAttacks, setMatchAttacks] = useState([]);
 
   useEffect(() => {
-    console.log(character);
-    console.log(selected);
-    console.log(charShowing);
-  }, [character, charShowing]);
+    console.log(enemy)
+    console.log(enemyIndex)
+    console.log(enemyAttacks)
+    console.log(selectionArray)
+  }, [enemy, enemyIndex, enemyAttacks, selectionArray])
 
   const charactersHidding = () => {
     if (selected) {
       setCharShowing(false);
     }
-  };
-
-  const randomEnemyAttacks = enemyAttacks.map(value => ({value, sort: Math.random()})).sort((a, b) => a.sort - b.sort).map(({value}) => value)
-
-  const match = () => {
-    let array = []
-    for (let i = 0; i < randomEnemyAttacks.length; i++){
-      array.push([selectionArray[i], randomEnemyAttacks[i]])
-    }
-    return array
   }
 
   const randomIntFromInterval = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
-  };
+  }
 
   const getEnemyCharacter = () => {
     const index = randomIntFromInterval(0, characters.length - 1);
     setEnemyCharacterSelected(true);
     setEnemyIndex(index);
-    setEnemyAttacks(characters[index].attacks);
-    const randomEnemyAttacks = enemyAttacks.map(value => ({value, sort: Math.random()})).sort((a, b) => a.sort - b.sort).map(({value}) => value)
-    setMatchAttacks(match())
-    console.log(randomEnemyAttacks)
-    console.log(match())
-  };
+    setEnemy(characters[index]);
+    setEnemyAttacks(characters[index].attacks.map(value => ({value, sort: Math.random()})).sort((a, b) => a.sort - b.sort).map(({value}) => value));
+  }
 
   return (
     <>
@@ -216,7 +205,7 @@ function App() {
         consecuencia.
       </p>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
