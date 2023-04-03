@@ -29,7 +29,7 @@ const Attacks = ({
   setAttackSelected2,
   setAttackSelected3,
   setAttackSelected4,
-  setShowEnemyButton
+  setShowEnemyButton,
 }) => {
   /* const [attackSelected0, setAttackSelected0] = useState(false);
   const [attackSelected1, setAttackSelected1] = useState(false);
@@ -67,9 +67,11 @@ const Attacks = ({
   ];
 
   const clickHandler = (id, name, power) => {
-    arraySetAttackSelected[id](!arrayAttackSelected[id]);
-    selecArray.push({ id, name, power });
-    setSelectionArray(selecArray);
+    if (arrayAttackSelected[id] === false) {
+      selecArray.push({ id, name, power });
+      setSelectionArray(selecArray);
+      arraySetAttackSelected[id](true);      
+    }
   };
 
   return (
