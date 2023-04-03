@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Attacks from "./components/attacks/Attacks";
 import Characters from "./components/characters/Characters";
-import VideoBg from "./components/videoBg/VideoBg";
-import ImageBg from "./components/imageBg/ImageBg";
+import ImageBg from "./components/ImageBg/ImageBg";
 
 import IMG1 from "./assets/attack-on-titan.png";
 import IMG2 from "./assets/female-titan.png";

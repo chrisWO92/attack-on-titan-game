@@ -1,10 +1,19 @@
 /*----------------- MEDIA QUERIES ------------------*/
 /*==============GENERAL DESKTOP=============*/
 
+.results-container {
+    height: 97vh;
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .displayFlex {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   gap: 3vh;
 }
 
@@ -14,7 +23,7 @@
 
 #result {
   width: 80%;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .result-title-string {
@@ -87,6 +96,56 @@
 
 /*========== BIG TABLETS ===========*/
 @media screen and (max-width: 1400px) and (orientation: portrait) {
+
+    .displayFlex {
+        gap: 1vw;
+      }
+
+    #result {
+        width: 100%;
+        margin: 0;
+      }
+
+      .result-title-string {
+        font-size: 2.4vw;
+      }
+
+      #user-attacks,
+#enemy-attacks,
+#individual-results {
+  width: 38%;
+  font-size: 2.5vw;
+  text-align: center;
+  padding: 1vw;
+  margin: 2vh 0 2vh 0;
+  color: white;
+  border-radius: 0.6rem;
+  background: rgba(204, 69, 32, 0.3);
+  backdrop-filter: blur(100px);
+}
+
+#individual-results {
+    width: 20%;
+    background: rgba(58, 77, 180, 0.5);
+  }
+
+  .user-attack,
+.enemy-attack {
+    width: 90%;
+  margin: 1.5vh;
+  padding: 1vw;
+  border-radius: 0.7rem;
+  background: rgba(58, 77, 180, 0.8);
+}
+
+.win-or-lose {
+    margin: 1.5vh;
+    padding: 1vw;
+    border-radius: 0.7rem;
+    background: rgba(204, 69, 32, 0.9);
+
+  }
+
 }
 
 /*========== SMALL TABLETS ===========*/
@@ -95,4 +154,63 @@
 
 /*========== SMARTPHONES ===========*/
 @media screen and (max-width: 420px) and (orientation: portrait) {
+
+    .result-title-string {
+        font-size: 2.8vw;
+      }
+
+      .match-title, .message-result, .wins-and-loses {
+        width: 98%;
+        font-size: 4.6vw;
+        text-align: center;
+        padding: 2vh;
+        margin: 1vh auto;
+        color: white;
+        border-radius: 0.4rem;
+        background: rgba(204, 69, 32, 0.8);
+        backdrop-filter: blur(7px);
+    }
+    
+    .wins-and-loses {
+        font-size: 1.5vh;
+        padding: 1vh;
+    }
+
+    .user-attack,
+    .enemy-attack {
+        width: 95%;
+      margin: 1vh auto;
+      padding: 1vw;
+      border-radius: 0.3rem;
+      background: rgba(58, 77, 180, 0.8);
+    }
+    
+    .win-or-lose {
+        width: 80%;
+        margin: 1vh auto;
+        padding: 1vw;
+        border-radius: 0.3rem;
+        background: rgba(204, 69, 32, 0.9);
+    
+      }
+
+      #user-attacks,
+      #enemy-attacks,
+      #individual-results {
+        width: 38%;
+        font-size: 2.8vw;
+        text-align: center;
+        padding: 1vw;
+        margin: 2vh 0 2vh 0;
+        color: white;
+        border-radius: 0.3rem;
+        background: rgba(204, 69, 32, 0.3);
+        backdrop-filter: blur(100px);
+      }
+      
+      #individual-results {
+          width: 20%;
+          background: rgba(58, 77, 180, 0.5);
+        }
+
 }
