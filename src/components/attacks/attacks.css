@@ -66,7 +66,6 @@
 #get-enemy-character {
   margin: 5vh auto 1vh;
   font-size: 3vh;
-  display: block;
   padding: 2vh 5vh;
   border-radius: 0.8rem;
   cursor: pointer;
@@ -136,6 +135,12 @@
     background: rgba(58, 77, 180, 0.8);
     cursor: pointer;
   }
+
+  #get-enemy-character {
+    position: absolute;
+    bottom: 8vh;
+    margin: 0 auto;
+  }
 }
 
 /*========== SMALL TABLETS ===========*/
@@ -188,7 +193,6 @@
     #get-enemy-character {
         margin: 5vh auto 1vh;
         font-size: 5vw;
-        display: block;
         padding: 2vh 5vh;
         border-radius: 0.6rem;
       }

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./attacks.css";
 
-const selecArray = [];
-
 const Attacks = ({
   charShowing,
   charAttacks,
@@ -18,15 +16,28 @@ const Attacks = ({
   setEnemyAttacks,
   getEnemyCharacter,
   setMatchAttacks,
-  matchAttacks
+  matchAttacks,
+  selecArray,
+  attackSelected0,
+  attackSelected1,
+  attackSelected2,
+  attackSelected3,
+  attackSelected4,
+  showEnemyButton,
+  setAttackSelected0,
+  setAttackSelected1,
+  setAttackSelected2,
+  setAttackSelected3,
+  setAttackSelected4,
+  setShowEnemyButton
 }) => {
-  const [attackSelected0, setAttackSelected0] = useState(false);
+  /* const [attackSelected0, setAttackSelected0] = useState(false);
   const [attackSelected1, setAttackSelected1] = useState(false);
   const [attackSelected2, setAttackSelected2] = useState(false);
   const [attackSelected3, setAttackSelected3] = useState(false);
   const [attackSelected4, setAttackSelected4] = useState(false);
 
-  const [showEnemyButton, setShowEnemyButton] = useState(false);
+  const [showEnemyButton, setShowEnemyButton] = useState(false); */
 
   useEffect(() => {
     if (selecArray.length === 5) {
@@ -56,11 +67,10 @@ const Attacks = ({
   ];
 
   const clickHandler = (id, name, power) => {
-    arraySetAttackSelected[id](!arrayAttackSelected[id])
-    selecArray.push({ id, name, power })
-    setSelectionArray(selecArray)
+    arraySetAttackSelected[id](!arrayAttackSelected[id]);
+    selecArray.push({ id, name, power });
+    setSelectionArray(selecArray);
   };
-
 
   return (
     <>
@@ -82,7 +92,9 @@ const Attacks = ({
                 <li
                   key={id}
                   onClick={() => clickHandler(id, name, power)}
-                  className={arrayAttackSelected[id] ? `selected-attack` : "titan-attack"}
+                  className={
+                    arrayAttackSelected[id] ? `selected-attack` : "titan-attack"
+                  }
                 >
                   {name}: {power}
                 </li>
@@ -94,7 +106,7 @@ const Attacks = ({
           className={showEnemyButton ? "displayBlock" : "displayNone"}
           onClick={getEnemyCharacter}
         >
-          Get Enemy Character
+          Play!
         </button>
       </div>
     </>

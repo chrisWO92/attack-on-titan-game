@@ -12,6 +12,7 @@ const Result = ({
   selectionArray,
   matchAttacks,
   character,
+  playAgain
 }) => {
   //const randomEnemyAttacks = enemyAttacks.map(value => ({value, sort: Math.random()})).sort((a, b) => a.sort - b.sort).map(({value}) => value)
 
@@ -45,7 +46,7 @@ const Result = ({
     if (wins > loses) {
       message = "Congrats, You Won!";
     } else if (wins < loses) {
-      message = "Sorr, You Lost!";
+      message = "Sorry, You Lost!";
     } else {
       message = "It's a draw!";
     }
@@ -100,6 +101,7 @@ const Result = ({
           {results[1][2]}
         </h3>
         <h2 className="message-result">{results[2]}</h2>
+        <button id="play-again" onClick={playAgain}>Play Again</button>
       </div>
     </>
   );

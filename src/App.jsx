@@ -113,6 +113,8 @@ const characters = [
   },
 ];
 
+let selecArray = [];
+
 function App() {
   const [character, setCharacter] = useState("");
   const [selected, setSelected] = useState(false);
@@ -126,6 +128,14 @@ function App() {
 
   const [selectionArray, setSelectionArray] = useState([]);
   const [matchAttacks, setMatchAttacks] = useState([]);
+
+  const [attackSelected0, setAttackSelected0] = useState(false);
+  const [attackSelected1, setAttackSelected1] = useState(false);
+  const [attackSelected2, setAttackSelected2] = useState(false);
+  const [attackSelected3, setAttackSelected3] = useState(false);
+  const [attackSelected4, setAttackSelected4] = useState(false);
+
+  const [showEnemyButton, setShowEnemyButton] = useState(false);
 
   useEffect(() => {
     console.log(enemy);
@@ -159,6 +169,27 @@ function App() {
     );
   };
 
+  const playAgain = () => {
+    setCharacter("")
+    setSelected(false)
+    setCharShowing(true)
+    setCharAttacks([])
+    setEnemyCharacterSelected(false)
+    setEnemy(null)
+    setEnemyIndex(null)
+    setEnemyName("")
+    setEnemyAttacks([])
+    setSelectionArray([])
+    setMatchAttacks([])
+    setShowEnemyButton(false)
+    setAttackSelected0(false)
+    setAttackSelected1(false)
+    setAttackSelected2(false)
+    setAttackSelected3(false)
+    setAttackSelected4(false)
+    selecArray = []
+  }
+
   return (
     <>
       <ImageBg />
@@ -186,6 +217,19 @@ function App() {
         matchAttacks={matchAttacks}
         setMatchAttacks={setMatchAttacks}
         setSelectionArray={setSelectionArray}
+        selecArray={selecArray}
+        attackSelected0={attackSelected0}
+  attackSelected1={attackSelected1}
+  attackSelected2={attackSelected2}
+  attackSelected3={attackSelected3}
+  attackSelected4={attackSelected4}
+  showEnemyButton={showEnemyButton}
+  setAttackSelected0={setAttackSelected0}
+  setAttackSelected1={setAttackSelected1}
+  setAttackSelected2={setAttackSelected2}
+  setAttackSelected3={setAttackSelected3}
+  setAttackSelected4={setAttackSelected4}
+  setShowEnemyButton={setShowEnemyButton}
       />
       <Result
         enemy={enemy}
@@ -199,6 +243,7 @@ function App() {
         selectionArray={selectionArray}
         matchAttacks={matchAttacks}
         character={character}
+        playAgain={playAgain}
       />
     </>
   );
