@@ -1,6 +1,6 @@
 /*=============GENERAL DESKTOP============*/
 
-#card {
+.card {
   /*background: rgba(58, 77, 180, 0.3);  */
   backdrop-filter: blur(1px);
   /*border: 3px solid white;*/
@@ -31,7 +31,7 @@
   transition: 0.3s;
 }
 
-#card:hover {
+.card:hover {
   --_p: 75%;
   filter: grayscale(0%);
   backdrop-filter: blur(50px);
@@ -66,11 +66,26 @@
   transition: 0.3s;
 }
 
-#card:hover .titan-image {
+.card:hover .titan-image {
   transform: scale(1.1);
 }
 
-#card:hover .titan-name {
+.card:hover .titan-name {
+  background: rgba(204, 69, 32, 0.6);
+}
+
+.card-selected {
+  --_p: 75%;
+  filter: grayscale(0%);
+  backdrop-filter: blur(50px);
+  transform: scale(1.05);
+}
+
+.titan-image-selected {
+  transform: scale(1.1);
+}
+
+.titan-name-selected {
   background: rgba(204, 69, 32, 0.6);
 }
 
@@ -86,7 +101,7 @@
 
 /*========== BIG TABLETS ===========*/
 @media screen and (max-width: 1400px) and (orientation: portrait) {
-  #card {
+  .card {
     flex-basis: 45%;
     height: 30vh;
     padding: 1vh 1vw;
@@ -110,8 +125,7 @@
 
 /*========== SMARTPHONES ===========*/
 @media screen and (max-width: 420px) and (orientation: portrait) {
-
-  #card {
+  .card {
     flex-basis: 95%;
     height: 35vh;
   }
@@ -119,6 +133,4 @@
   #image-container {
     height: 23vh;
   }
-  
-
 }

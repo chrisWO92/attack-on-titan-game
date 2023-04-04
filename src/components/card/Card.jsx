@@ -19,10 +19,10 @@ const Card = ({
 
   return (
     <>
-      <div id="card" onClick={characterSelection}>
-        <h3 className="titan-name">{name}</h3>
+      <div onClick={characterSelection} className={character === name ? ` card card-selected` : `card`}>
+        <h3 className={character === name ? `titan-name titan-name-selected` : `titan-name`}>{name}</h3>
         <div id="image-container">
-          <img src={picture} alt={name} className="titan-image"/>
+          <img src={picture} alt={name} className={character === name ? `titan-image titan-image-selected` : `titan-image`} />
         </div>
       </div>
     </>
