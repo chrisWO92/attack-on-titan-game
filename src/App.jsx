@@ -3,6 +3,7 @@ import "./App.css";
 import Attacks from "./components/attacks/Attacks";
 import Characters from "./components/characters/Characters";
 import ImageBg from "./components/ImageBg/ImageBg";
+import Map from "./components/map/Map";
 
 import IMG1 from "./assets/attack-on-titan.png";
 import IMG2 from "./assets/female-titan.png";
@@ -13,6 +14,15 @@ import IMG6 from "./assets/warhammer-titan.png";
 import IMG7 from "./assets/jaw-titan.png";
 import IMG8 from "./assets/cart-titan.png";
 import Result from "./components/result/Result";
+
+const canvaVariables = [
+  { x: 20 },
+  { y: 30 },
+  { width: 50 },
+  { height: 50 },
+  { speedX: 0 },
+  { speedY: 0 },
+]
 
 const characters = [
   {
@@ -25,7 +35,7 @@ const characters = [
       { id: 2, name: "Strength", power: 8 },
       { id: 3, name: "Stamina", power: 10 },
       { id: 4, name: "Hardening", power: 10 },
-    ],
+    ]
   },
   {
     id: "1",
@@ -137,6 +147,10 @@ function App() {
 
   const [showEnemyButton, setShowEnemyButton] = useState(false);
 
+  const [showCanvaMap, setShowCanvaMap] = useState(false);
+
+  const [showResults, setShowResults] = useState(false);
+
   useEffect(() => {
     console.log(enemy);
     console.log(enemyIndex);
@@ -148,7 +162,9 @@ function App() {
   const charactersHidding = () => {
     if (selected) {
       setCharShowing(false);
+      setShowCanvaMap(true);
     }
+    console.log(enemyCharacterSelected)
   };
 
   const randomIntFromInterval = (min, max) => {
@@ -157,7 +173,8 @@ function App() {
 
   const getEnemyCharacter = () => {
     const index = randomIntFromInterval(0, characters.length - 1);
-    setEnemyCharacterSelected(true);
+    setEnemyCharacterSelected(false);
+    setShowResults(true);
     setEnemyIndex(index);
     setEnemy(characters[index]);
     setEnemyName(characters[index].name);
@@ -170,24 +187,31 @@ function App() {
   };
 
   const playAgain = () => {
-    setCharacter("")
-    setSelected(false)
-    setCharShowing(true)
-    setCharAttacks([])
-    setEnemyCharacterSelected(false)
-    setEnemy(null)
-    setEnemyIndex(null)
-    setEnemyName("")
-    setEnemyAttacks([])
-    setSelectionArray([])
-    setMatchAttacks([])
-    setShowEnemyButton(false)
-    setAttackSelected0(false)
-    setAttackSelected1(false)
-    setAttackSelected2(false)
-    setAttackSelected3(false)
-    setAttackSelected4(false)
-    selecArray = []
+    setCharacter("");
+    setSelected(false);
+    setCharShowing(true);
+    setCharAttacks([]);
+    setEnemyCharacterSelected(false);
+    setEnemy(null);
+    setEnemyIndex(null);
+    setEnemyName("");
+    setEnemyAttacks([]);
+    setSelectionArray([]);
+    setMatchAttacks([]);
+    setShowEnemyButton(false);
+    setAttackSelected0(false);
+    setAttackSelected1(false);
+    setAttackSelected2(false);
+    setAttackSelected3(false);
+    setAttackSelected4(false);
+    setShowCanvaMap(false);
+    setShowResults(false);
+    selecArray = [];
+  };
+
+  const mapHiding = () => {
+    setShowCanvaMap(false)
+    setEnemyCharacterSelected(true);
   }
 
   return (
@@ -201,6 +225,12 @@ function App() {
         charShowing={charShowing}
         charactersHidding={charactersHidding}
         setCharAttacks={setCharAttacks}
+      />
+      <Map
+        charShowing={charShowing}
+        showCanvaMap={showCanvaMap}
+        setShowCanvaMap={setShowCanvaMap}
+        mapHiding={mapHiding}
       />
       <Attacks
         getEnemyCharacter={getEnemyCharacter}
@@ -219,17 +249,17 @@ function App() {
         setSelectionArray={setSelectionArray}
         selecArray={selecArray}
         attackSelected0={attackSelected0}
-  attackSelected1={attackSelected1}
-  attackSelected2={attackSelected2}
-  attackSelected3={attackSelected3}
-  attackSelected4={attackSelected4}
-  showEnemyButton={showEnemyButton}
-  setAttackSelected0={setAttackSelected0}
-  setAttackSelected1={setAttackSelected1}
-  setAttackSelected2={setAttackSelected2}
-  setAttackSelected3={setAttackSelected3}
-  setAttackSelected4={setAttackSelected4}
-  setShowEnemyButton={setShowEnemyButton}
+        attackSelected1={attackSelected1}
+        attackSelected2={attackSelected2}
+        attackSelected3={attackSelected3}
+        attackSelected4={attackSelected4}
+        showEnemyButton={showEnemyButton}
+        setAttackSelected0={setAttackSelected0}
+        setAttackSelected1={setAttackSelected1}
+        setAttackSelected2={setAttackSelected2}
+        setAttackSelected3={setAttackSelected3}
+        setAttackSelected4={setAttackSelected4}
+        setShowEnemyButton={setShowEnemyButton}
       />
       <Result
         enemy={enemy}
@@ -244,6 +274,8 @@ function App() {
         matchAttacks={matchAttacks}
         character={character}
         playAgain={playAgain}
+        showResults={showResults}
+        setShowResults={setShowResults}
       />
     </>
   );

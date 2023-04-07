@@ -81,8 +81,8 @@ const Attacks = ({
           charShowing
             ? "displayNone"
             : enemyCharacterSelected
-            ? "displayNone"
-            : "attacksFlex"
+              ? "attacksFlex"
+              : "displayNone"
         }
       >
         <h3 className="name-selection">You: {character}</h3>

@@ -12,7 +12,9 @@ const Result = ({
   selectionArray,
   matchAttacks,
   character,
-  playAgain
+  playAgain,
+  setShowResults,
+  showResults
 }) => {
   //const randomEnemyAttacks = enemyAttacks.map(value => ({value, sort: Math.random()})).sort((a, b) => a.sort - b.sort).map(({value}) => value)
 
@@ -58,7 +60,7 @@ const Result = ({
   return (
     <>
       <div
-        className={enemyCharacterSelected ? "results-container" : "displayNone"}
+        className={showResults ? "results-container" : "displayNone"}
       >
         <h2 className="match-title">MATCH RESULTS</h2>
         <div id="result" className="displayFlex">
