@@ -2,6 +2,7 @@ import React from "react";
 import "./card.css";
 
 const Card = ({
+  index,
   name,
   picture,
   attacks,
@@ -9,12 +10,18 @@ const Card = ({
   character,
   setSelected,
   setCharAttacks,
+  characterIndex,
+  setCharacterIndex,
+  pic,
+  setPic
 }) => {
 
   const characterSelection = () => {
     setCharacter(name);
     setSelected(true);
     setCharAttacks(attacks);
+    setCharacterIndex(index);
+    setPic(picture);
   };
 
   return (

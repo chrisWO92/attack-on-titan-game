@@ -11,6 +11,10 @@ const Characters = ({
   charShowing,
   charactersHidding,
   setCharAttacks,
+  characterIndex,
+  setCharacterIndex,
+  pic,
+  setPic
 }) => {
   return (
     <>
@@ -22,6 +26,7 @@ const Characters = ({
               return (
                 <Card
                   key={id}
+                  index={id}
                   name={name}
                   picture={picture}
                   attacks={attacks}
@@ -29,6 +34,10 @@ const Characters = ({
                   character={character}
                   setSelected={setSelected}
                   setCharAttacks={setCharAttacks}
+                  characterIndex={characterIndex}
+                  setCharacterIndex={setCharacterIndex}
+                  pic={pic}
+                  setPic={setPic}
                 />
               );
             })}

@@ -151,6 +151,9 @@ function App() {
 
   const [showResults, setShowResults] = useState(false);
 
+  const [characterIndex, setCharacterIndex] = useState(null);
+  const [pic, setPic] = useState(null);
+
   useEffect(() => {
     console.log(enemy);
     console.log(enemyIndex);
@@ -165,6 +168,7 @@ function App() {
       setShowCanvaMap(true);
     }
     console.log(enemyCharacterSelected)
+    console.log(pic)
   };
 
   const randomIntFromInterval = (min, max) => {
@@ -225,12 +229,19 @@ function App() {
         charShowing={charShowing}
         charactersHidding={charactersHidding}
         setCharAttacks={setCharAttacks}
+        characterIndex={characterIndex}
+        setCharacterIndex={setCharacterIndex}
+        pic={pic}
+        setPic={setPic}
       />
       <Map
         charShowing={charShowing}
         showCanvaMap={showCanvaMap}
         setShowCanvaMap={setShowCanvaMap}
         mapHiding={mapHiding}
+        characters={characters}
+        characterIndex={characterIndex}
+        pic={pic}
       />
       <Attacks
         getEnemyCharacter={getEnemyCharacter}

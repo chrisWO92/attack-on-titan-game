@@ -14,9 +14,35 @@
 
 #map-button {
     cursor: pointer;
+    padding: 1vh 2vw;
     width: 8vw;
     height: 5vh;
+    font-size: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.4rem;
 }
+
+#buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+    margin: 2vh 0;
+}
+
+.move-button {
+    padding: 1vh 2vw;
+    font-size: 1vw;
+    width: 6vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 0.4rem;
+}
+
+
 /*========== BIG NOTEBOOKS ===========*/
 @media screen and (max-width: 1300px) and (orientation: landscape) {
     
