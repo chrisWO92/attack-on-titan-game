@@ -34,6 +34,7 @@ const Map = ({
 
   let charIMG = new Image();
   charIMG.src = pic;
+  //let interval
 
  /*  const map = canvasRef.current;
   const lienzo = map.getContext("2d"); */
@@ -55,6 +56,7 @@ const Map = ({
   };
 
   useEffect(() => {
+    /* let interval = setInterval(drawCanvas, 50) */
     drawCanvas()
     /* const map = canvasRef.current;
     const lienzo = map.getContext("2d");
@@ -105,8 +107,11 @@ const Map = ({
   };
 
   const stopMove = () => {
-    canvas.speedX = 0;
-    canvas.speedY = 0;
+    setCanvas(canvas => ({
+      ...canvas,
+      speedX: 0,
+      speedY: 0
+    }))
   };
 
   return (
@@ -124,16 +129,16 @@ const Map = ({
           {/* {drawCanvas} */}
         </canvas>
         <div id="buttons">
-          <button id="up" className="move-button" onClick={moveUp}>
+          <button id="up" className="move-button" onClick={moveUp} onMouseDown={moveUp} onMouseUp={stopMove}>
             Up
           </button>
-          <button id="down" className="move-button" onClick={moveDown}>
+          <button id="down" className="move-button" onClick={moveDown} onMouseDown={moveDown} onMouseUp={stopMove}>
             Down
           </button>
-          <button id="right" className="move-button" onClick={moveRight}>
+          <button id="right" className="move-button" onClick={moveRight} onMouseDown={moveRight} onMouseUp={stopMove}>
             Right
           </button>
-          <button id="left" className="move-button" onClick={moveLeft}>
+          <button id="left" className="move-button" onClick={moveLeft} onMouseDown={moveLeft} onMouseUp={stopMove}>
             Left
           </button>
         </div>
