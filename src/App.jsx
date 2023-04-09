@@ -15,15 +15,6 @@ import IMG7 from "./assets/jaw-titan.png";
 import IMG8 from "./assets/cart-titan.png";
 import Result from "./components/result/Result";
 
-const canvaVariables = [
-  { x: 20 },
-  { y: 30 },
-  { width: 50 },
-  { height: 50 },
-  { speedX: 0 },
-  { speedY: 0 },
-]
-
 const characters = [
   {
     id: "0",
