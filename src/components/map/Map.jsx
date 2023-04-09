@@ -2,14 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./map.css";
 import mapBGsrc from "../../assets/map.png";
 
-let canvaVariables = {
-  x: 3,
-  y: 3,
-  width: 50,
-  height: 50,
-  speedX: 0,
-  speedY: 0,
-};
+
 
 let interval
 
@@ -21,14 +14,13 @@ const Map = ({
   characters,
   characterIndex,
   pic,
+  canvas, setCanvas
 }) => {
 
   const canvasRef = useRef();
-  const [canvas, setCanvas] = useState(canvaVariables)
+  
   const [isMouseHolding, setIsMouseHolding] = useState(false)
-  const [isKeyHolding, setIsKeyHolding] = useState(false)
   const [order, setOrder] = useState('')
-  const [key, setKey] = useState('')
 
 
   let mapBG = new Image();
@@ -59,32 +51,22 @@ const Map = ({
   };
 
   const keyPressed = (e) => {
-    //setIsMouseHolding(false)
-    //setKey(e.key)
-    //setIsKeyHolding(true)
     switch (e.key) {
         case 'ArrowRight':
             move('right')
             break
         case 'ArrowLeft':
-           /*  setIsKeyHolding(true)
-            setKey('ArrowLeft') */
             move('left')
             break
         case 'ArrowUp':
-            /* setIsKeyHolding(true)
-            setKey('ArrowUp') */
             move('up')
             break
         case 'ArrowDown':
-            /* setIsKeyHolding(true)
-            setKey('ArrowDown') */
             move('down')
             break
         default:
             break;
     }
-
   }
 
   useEffect(() => {
@@ -99,12 +81,10 @@ const Map = ({
   useEffect(() => {
 
     if (isMouseHolding) {
-
       if (order === 'up') {
         repeat(() => {
           setCanvas(canvas => ({
             ...canvas,
-            speedX: 0,
             speedY: -5
           }
           ))
@@ -114,7 +94,6 @@ const Map = ({
         repeat(() => {
           setCanvas(canvas => ({
             ...canvas,
-            speedX: 0,
             speedY: 5
           }))
         })
@@ -124,7 +103,6 @@ const Map = ({
           setCanvas(canvas => ({
             ...canvas,
             speedX: 5,
-            speedY: 0
           }))
         })
       }
@@ -133,60 +111,13 @@ const Map = ({
           setCanvas(canvas => ({
             ...canvas,
             speedX: -5,
-            speedY: 0
           }))
         })
       }
     } else {
       stop();
     }
-
   }, [isMouseHolding]);
-
- /*  useEffect(() => {
-
-    if (isKeyHolding) {
-      if (key === 'ArrowUp') {
-        repeat(() => {
-          setCanvas(canvas => ({
-            ...canvas,
-            speedX: 0,
-            speedY: -5
-          }
-          ))
-        })
-      } 
-      else if (key === 'ArrowDown') {
-        repeat(() => {
-          setCanvas(canvas => ({
-            ...canvas,
-            speedX: 0,
-            speedY: 5
-          }))
-        })
-      }
-      else if (key === 'ArrowRight') {
-        repeat(() => {
-          setCanvas(canvas => ({
-            ...canvas,
-            speedX: 5,
-            speedY: 0
-          }))
-        })
-      }
-      else if (key === 'ArrowLeft') {
-        repeat(() => {
-          setCanvas(canvas => ({
-            ...canvas,
-            speedX: -5,
-            speedY: 0
-          }))
-        })
-      }
-    } else {
-      keyUp();
-    }
-  }, [isKeyHolding]); */
 
   const move = (or) => {
     setIsMouseHolding(true)
@@ -203,17 +134,6 @@ const Map = ({
       speedY: 0
     }))
   }
-
- /*  function keyUp() {
-    setKey('')
-    setIsKeyHolding(false)
-    clearInterval(interval);    
-    setCanvas(canvas => ({
-      ...canvas,
-      speedX: 0,
-      speedY: 0
-    }))
-  } */
 
   return (
     <>

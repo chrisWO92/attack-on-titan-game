@@ -15,6 +15,15 @@ import IMG7 from "./assets/jaw-titan.png";
 import IMG8 from "./assets/cart-titan.png";
 import Result from "./components/result/Result";
 
+let canvaVariables = {
+  x: 3,
+  y: 3,
+  width: 50,
+  height: 50,
+  speedX: 0,
+  speedY: 0,
+};
+
 const characters = [
   {
     id: "0",
@@ -144,6 +153,7 @@ function App() {
 
   const [characterIndex, setCharacterIndex] = useState(null);
   const [pic, setPic] = useState(null);
+  const [canvas, setCanvas] = useState(canvaVariables)
 
   useEffect(() => {
     console.log(enemy);
@@ -201,6 +211,7 @@ function App() {
     setAttackSelected4(false);
     setShowCanvaMap(false);
     setShowResults(false);
+    setCanvas(canvaVariables);
     selecArray = [];
   };
 
@@ -233,6 +244,8 @@ function App() {
         characters={characters}
         characterIndex={characterIndex}
         pic={pic}
+        canvas={canvas}
+        setCanvas={setCanvas}
       />
       <Attacks
         getEnemyCharacter={getEnemyCharacter}
