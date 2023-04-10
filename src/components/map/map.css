@@ -1,11 +1,12 @@
 /*----------------- MEDIA QUERIES ------------------*/
 
 #map {
-    width: 600px;
-    height: 500px;
+    width: 700px;
+    height: 600px;
 }
 
 .canvaMap {
+    height: 97vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,7 +17,6 @@
     margin: 2vh 0;
     cursor: pointer;
     padding: 2vh 5vh;
-    font-size: 3vh;
     justify-content: center;
     align-items: center;
     border-radius: 0.4rem;
@@ -31,13 +31,32 @@
 }
 
 .mapButtonFlex {
+    font-size: 3vh;
     display: flex;
+    position: absolute;
+    bottom: 5vh;
+    margin: 0 auto;
+}
+
+.first-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0vh;
+}
+
+.second-line {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
 }
 
 #buttons {
-    flex-direction: row;
-    gap: 1vw;
+    flex-direction: column;
+    gap: 10px;
     margin: 2vh 0;
+    margin-bottom: 20vh;
 }
 
 .buttonsFlex {
@@ -45,14 +64,22 @@
 }
 
 .move-button {
-    padding: 1vh 2vw;
+    padding: 1.5vh 2vw;
     font-size: 1vw;
-    width: 6vw;
+    width: 5.5vw;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     border-radius: 0.4rem;
+    background: rgba(58, 77, 180, 1);
+    color: white;
+    transition: 0.1s;
+}
+
+.move-button:active {
+    box-sizing: border-box;
+  transform: scale(1.1);
 }
 
 .displayNone {
@@ -62,7 +89,22 @@
 
 /*========== BIG NOTEBOOKS ===========*/
 @media screen and (max-width: 1300px) and (orientation: landscape) {
-    
+
+    #map {
+        width: 600px;
+        height: 500px;
+    }
+
+    .mapButtonFlex {
+        font-size: 2.7vh;
+        bottom: 6vh;
+
+    }
+
+    .move-button {
+        font-size: 1.4vw;
+        width: 6.5vw;
+    }
 
 }
 
@@ -70,6 +112,16 @@
 /*========== SMALL NOTEBOOKS ===========*/
 @media screen and (max-width: 1050px) and (orientation: landscape) {
 
+    #map {
+        width: 500px;
+        height: 400px;
+    }
+
+    .mapButtonFlex {
+        font-size: 3vh;
+        bottom: 5.5vh;
+        margin: 0 auto;
+    }
 
 }
 
@@ -78,13 +130,47 @@
 /*========== BIG TABLETS ===========*/
 @media screen and (max-width: 1400px) and (orientation: portrait) {
 
+    #map {
+        width: 90%;
+        height: 50vh;
+    }
 
+    .move-button {
+        padding: 1vh 2vw;
+        font-size: 3.5vw;
+        width: 19vw;       
+        border-radius: 0.4rem;
+    }
+
+    #buttons {
+        margin-bottom: 10vh;
+    }
+
+    .mapButtonFlex {
+        font-size: 4vw;
+        bottom: 11vh;
+    }
 
 }
 
 /*========== SMALL TABLETS ===========*/
 @media screen and (max-width: 820px)and (orientation: portrait) {
     
+    .move-button {
+        padding: 1.2vh 2vw;
+        font-size: 3.5vw;
+        width: 19vw;       
+        border-radius: 0.4rem;
+    }
+
+    #buttons {
+        margin-bottom: 10vh;
+    }
+
+    .mapButtonFlex {
+        font-size: 3.8vw;
+        bottom: 10vh;
+    }
 
 
 }
@@ -92,6 +178,19 @@
 /*========== SMARTPHONES ===========*/
 @media screen and (max-width: 420px) and (orientation: portrait) {
 
+    #map {
+        width: 97%;
+        height: 40vh;
+    }
 
+    .move-button {
+        font-size: 4vw;
+        width: 19vw;       
+    }
+
+    .mapButtonFlex {
+        font-size: 5vw;
+        bottom: 15vh;
+    }
 
 }

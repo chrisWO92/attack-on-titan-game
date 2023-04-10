@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./map.css";
 import mapBGsrc from "../../assets/map.png";
-
+import {AiOutlineArrowUp} from 'react-icons/ai'
+import {AiOutlineArrowLeft} from 'react-icons/ai'
+import {AiOutlineArrowDown} from 'react-icons/ai'
+import {AiOutlineArrowRight} from 'react-icons/ai'
 
 
 let interval
@@ -219,18 +222,22 @@ const Map = ({
       >
         <canvas id="map" ref={canvasRef}></canvas>
         <div id="buttons" className='buttonsFlex'>
-          <button id="up" className="move-button" onMouseDown={() => move('up')} onMouseUp={stop}>
-            Up
-          </button>
-          <button id="down" className="move-button" onMouseDown={() => move('down')} onMouseUp={stop}>
-            Down
-          </button>
-          <button id="right" className="move-button" onMouseDown={() => move('right')} onMouseUp={stop}>
-            Right
-          </button>
+          <div className="first-line">
+            <button id="up" className="move-button" onMouseDown={() => move('up')} onMouseUp={stop}>
+              <AiOutlineArrowUp />
+            </button>
+          </div>
+          <div className="second-line">
           <button id="left" className="move-button" onMouseDown={() => move('left')} onMouseUp={stop}>
-            Left
+            <AiOutlineArrowLeft />
+          </button>          
+          <button id="down" className="move-button" onMouseDown={() => move('down')} onMouseUp={stop}>
+            <AiOutlineArrowDown />
+          </button>          
+          <button id="right" className="move-button" onMouseDown={() => move('right')} onMouseUp={stop}>
+            <AiOutlineArrowRight />
           </button>
+          </div>        
         </div>
         <button id="map-button" className={enemySelected ? 'mapButtonFlex' : 'displayNone'} onClick={mapHiding}>
           Play Against: {enemyName}
