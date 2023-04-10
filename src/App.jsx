@@ -142,7 +142,7 @@ const characters = [
 let enemyIMGArraray = []
 
 for (let i = 0; i < characters.length; i++) {
-  enemyIMGArraray.push({pic: characters[i].picture, x: characters[i].x, y: characters[i].y, name: characters[i].name})
+  enemyIMGArraray.push({pic: characters[i].picture, x: characters[i].x, y: characters[i].y, name: characters[i].name, id: characters[i].id})
 }
 
 let selecArray = [];
@@ -175,7 +175,8 @@ function App() {
 
   const [characterIndex, setCharacterIndex] = useState(null);
   const [pic, setPic] = useState(null);
-  const [canvas, setCanvas] = useState(canvaVariables)
+  const [canvas, setCanvas] = useState(canvaVariables);
+  const [enemySelected, setEnemySelected] = useState(false);
 
   useEffect(() => {
     console.log(enemy);
@@ -193,19 +194,19 @@ function App() {
     console.log(enemyIMGArraray)
   };
 
-  const randomIntFromInterval = (min, max) => {
+  /* const randomIntFromInterval = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
-  };
+  }; */
 
   const getEnemyCharacter = () => {
-    const index = randomIntFromInterval(0, characters.length - 1);
+    //const index = randomIntFromInterval(0, characters.length - 1);
     setEnemyCharacterSelected(false);
     setShowResults(true);
-    setEnemyIndex(index);
+    /* setEnemyIndex(index);
     setEnemy(characters[index]);
-    setEnemyName(characters[index].name);
+    setEnemyName(characters[index].name); */
     setEnemyAttacks(
-      characters[index].attacks
+      characters[enemyIndex].attacks
         .map((value) => ({ value, sort: Math.random() }))
         .sort((a, b) => a.sort - b.sort)
         .map(({ value }) => value)
@@ -233,6 +234,7 @@ function App() {
     setShowCanvaMap(false);
     setShowResults(false);
     setCanvas(canvaVariables);
+    setEnemySelected(false);
     selecArray = [];
   };
 
@@ -268,6 +270,12 @@ function App() {
         canvas={canvas}
         setCanvas={setCanvas}
         enemyIMGArraray={enemyIMGArraray}
+        setEnemyIndex={setEnemyIndex}
+        setEnemy={setEnemy}
+        enemyName={enemyName}
+        setEnemyName={setEnemyName}
+        enemySelected={enemySelected}
+        setEnemySelected={setEnemySelected}
       />
       <Attacks
         getEnemyCharacter={getEnemyCharacter}

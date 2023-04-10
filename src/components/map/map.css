@@ -13,22 +13,35 @@
 }
 
 #map-button {
+    margin: 2vh 0;
     cursor: pointer;
-    padding: 1vh 2vw;
-    width: 8vw;
-    height: 5vh;
-    font-size: 1vw;
-    display: flex;
+    padding: 2vh 5vh;
+    font-size: 3vh;
     justify-content: center;
     align-items: center;
     border-radius: 0.4rem;
+    background: rgba(204, 69, 32, 0.9);
+    color: white;
+    transition: 0.3s;
+}
+
+#map-button:hover {
+    box-sizing: border-box;
+    transform: scale(1.1);
+}
+
+.mapButtonFlex {
+    display: flex;
 }
 
 #buttons {
-    display: flex;
     flex-direction: row;
     gap: 1vw;
     margin: 2vh 0;
+}
+
+.buttonsFlex {
+    display: flex;
 }
 
 .move-button {
@@ -40,6 +53,10 @@
     align-items: center;
     cursor: pointer;
     border-radius: 0.4rem;
+}
+
+.displayNone {
+    display: none;
 }
 
 

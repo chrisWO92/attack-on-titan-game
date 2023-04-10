@@ -108,7 +108,7 @@ const Attacks = ({
           className={showEnemyButton ? "displayBlock" : "displayNone"}
           onClick={getEnemyCharacter}
         >
-          Play!
+          Go!
         </button>
       </div>
     </>

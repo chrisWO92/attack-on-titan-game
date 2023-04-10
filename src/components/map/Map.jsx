@@ -16,14 +16,20 @@ const Map = ({
   pic,
   canvas, 
   setCanvas,
-  enemyIMGArraray
+  enemyIMGArraray,
+  setEnemyIndex,
+  setEnemy,
+  setEnemyName,
+  enemyName,
+  enemySelected,
+  setEnemySelected
 }) => {
 
   const canvasRef = useRef();
   
   const [isMouseHolding, setIsMouseHolding] = useState(false)
   const [order, setOrder] = useState('')
-
+  
 
   let mapBG = new Image();
   mapBG.src = mapBGsrc;
@@ -83,10 +89,10 @@ const Map = ({
       ) {
         return
     }
-    console.log(enemy.name)
-    console.log(canvas.x)
-    console.log(canvas.y)
-
+    setEnemyIndex(enemy.id);
+    setEnemy(characters[enemy.id]);
+    setEnemyName(characters[enemy.id].name);
+    setEnemySelected(true)
   }
 
   const drawCanvas = () => {
@@ -128,8 +134,6 @@ const Map = ({
     }
   }
 
-
-
   useEffect(() => {
     drawCanvas()
     drawEnemies()
@@ -141,9 +145,8 @@ const Map = ({
   })
 
   useEffect(() => {
-    document.addEventListener('keydown', keyPressed)
-    document.addEventListener('keyup', stop)
-    
+      document.addEventListener('keydown', keyPressed)
+      document.addEventListener('keyup', stop)
   }, [])
 
   useEffect(() => {
@@ -215,7 +218,7 @@ const Map = ({
         }
       >
         <canvas id="map" ref={canvasRef}></canvas>
-        <div id="buttons">
+        <div id="buttons" className='buttonsFlex'>
           <button id="up" className="move-button" onMouseDown={() => move('up')} onMouseUp={stop}>
             Up
           </button>
@@ -229,8 +232,8 @@ const Map = ({
             Left
           </button>
         </div>
-        <button id="map-button" onClick={mapHiding}>
-          Continue
+        <button id="map-button" className={enemySelected ? 'mapButtonFlex' : 'displayNone'} onClick={mapHiding}>
+          Play Against: {enemyName}
         </button>
       </div>
     </>
