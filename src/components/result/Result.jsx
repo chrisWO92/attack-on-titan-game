@@ -44,7 +44,6 @@ const Result = ({
       });
     }
     let matchResultsArray = [wins, loses, draws];
-    console.log(matchResultsArray);
     if (wins > loses) {
       message = "Congrats, You Won!";
     } else if (wins < loses) {

@@ -18,8 +18,8 @@ import Result from "./components/result/Result";
 let canvaVariables = {
   x: 3,
   y: 3,
-  width: 50,
-  height: 50,
+  width: 30,
+  height: 25,
   speedX: 0,
   speedY: 0,
 };
@@ -35,7 +35,9 @@ const characters = [
       { id: 2, name: "Strength", power: 8 },
       { id: 3, name: "Stamina", power: 10 },
       { id: 4, name: "Hardening", power: 10 },
-    ]
+    ],
+    x: 150,
+    y: 60
   },
   {
     id: "1",
@@ -48,6 +50,8 @@ const characters = [
       { id: 3, name: "Armor", power: 7 },
       { id: 4, name: "Scream Suicide", power: 10 },
     ],
+    x: 90,
+    y: 50
   },
   {
     id: "2",
@@ -60,6 +64,8 @@ const characters = [
       { id: 3, name: "Armor", power: 9 },
       { id: 4, name: "Armored Assault", power: 10 },
     ],
+    x: 130,
+    y: 100
   },
   {
     id: "3",
@@ -72,6 +78,8 @@ const characters = [
       { id: 3, name: "Hot Steam", power: 9 },
       { id: 4, name: "Blast Attack", power: 10 },
     ],
+    x: 130,
+    y: 125
   },
   {
     id: "4",
@@ -84,6 +92,8 @@ const characters = [
       { id: 3, name: "Titan Control", power: 9 },
       { id: 4, name: "Stones", power: 10 },
     ],
+    x: 5,
+    y: 120
   },
   {
     id: "5",
@@ -96,6 +106,8 @@ const characters = [
       { id: 3, name: "Armored Weapons", power: 10 },
       { id: 4, name: "Tines Attack ", power: 10 },
     ],
+    x: 250,
+    y: 120
   },
   {
     id: "6",
@@ -108,6 +120,8 @@ const characters = [
       { id: 3, name: "Claws", power: 9 },
       { id: 4, name: "Jaw Attack", power: 9 },
     ],
+    x: 250,
+    y: 10
   },
   {
     id: "7",
@@ -120,8 +134,16 @@ const characters = [
       { id: 3, name: "Intelligence", power: 8 },
       { id: 4, name: "Amo Attack", power: 9 },
     ],
+    x: 260,
+    y: 70
   },
 ];
+
+let enemyIMGArraray = []
+
+for (let i = 0; i < characters.length; i++) {
+  enemyIMGArraray.push({pic: characters[i].picture, x: characters[i].x, y: characters[i].y, name: characters[i].name})
+}
 
 let selecArray = [];
 
@@ -168,8 +190,7 @@ function App() {
       setCharShowing(false);
       setShowCanvaMap(true);
     }
-    console.log(enemyCharacterSelected)
-    console.log(pic)
+    console.log(enemyIMGArraray)
   };
 
   const randomIntFromInterval = (min, max) => {
@@ -246,6 +267,7 @@ function App() {
         pic={pic}
         canvas={canvas}
         setCanvas={setCanvas}
+        enemyIMGArraray={enemyIMGArraray}
       />
       <Attacks
         getEnemyCharacter={getEnemyCharacter}

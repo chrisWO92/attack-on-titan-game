@@ -14,7 +14,9 @@ const Map = ({
   characters,
   characterIndex,
   pic,
-  canvas, setCanvas
+  canvas, 
+  setCanvas,
+  enemyIMGArraray
 }) => {
 
   const canvasRef = useRef();
@@ -29,6 +31,63 @@ const Map = ({
   let charIMG = new Image();
   charIMG.src = pic;
 
+  let enemyIMG = []
+
+/*   const map2 = canvasRef.current;
+  const lienzo2 = map2.getContext("2d") */
+
+  for (let i = 0; i < enemyIMGArraray.length; i++) {
+    let img = new Image()
+    img.src = enemyIMGArraray[i].pic
+    enemyIMG.push(img)
+    /* lienzo2.drawImage(
+      enemyIMG[0],
+      enemyIMGArraray[0].x,
+      enemyIMGArraray[0].y,
+      canvas.width,
+      canvas.height
+    ); */
+  }
+
+  const drawEnemies = () => {
+    const map = canvasRef.current;
+    const lienzo = map.getContext("2d");
+    for (let i = 0; i < enemyIMG.length; i++) {
+      lienzo.drawImage(
+        enemyIMG[i],
+        enemyIMGArraray[i].x,
+        enemyIMGArraray[i].y,
+        canvas.width,
+        canvas.height
+      );
+    }
+  }
+
+  const colission = (enemy) => {
+
+    const bottomSideCharacter = canvas.y + canvas.height
+    const topSideCharacter = canvas.y
+    const rightSideCharacter = canvas.x + canvas.width
+    const leftSideCharacter = canvas.x
+
+    const topSideEnemy = enemy.y
+    const bottomSideEnemy = enemy.y + canvas.height
+    const leftSideEnemy = enemy.x
+    const rightSideEnemy = enemy.x + canvas.width
+
+    if (
+      bottomSideCharacter < topSideEnemy ||
+      topSideCharacter > bottomSideEnemy ||
+      rightSideCharacter < leftSideEnemy ||
+      leftSideCharacter > rightSideEnemy
+      ) {
+        return
+    }
+    console.log(enemy.name)
+    console.log(canvas.x)
+    console.log(canvas.y)
+
+  }
 
   const drawCanvas = () => {
     const map = canvasRef.current;
@@ -43,7 +102,7 @@ const Map = ({
       canvas.y,
       canvas.width,
       canvas.height
-    );
+    );    
   };
 
   const repeat = (what) => {
@@ -69,13 +128,22 @@ const Map = ({
     }
   }
 
+
+
   useEffect(() => {
     drawCanvas()
+    drawEnemies()
+    if (canvas.speedX || canvas.speedY) {
+      for (let i = 0; i < enemyIMGArraray.length; i++){
+        colission(enemyIMGArraray[i])
+      }
+    }
   })
 
   useEffect(() => {
     document.addEventListener('keydown', keyPressed)
     document.addEventListener('keyup', stop)
+    
   }, [])
 
   useEffect(() => {
