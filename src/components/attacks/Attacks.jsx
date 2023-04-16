@@ -1,47 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./attacks.css";
 
 const Attacks = ({
-  charShowing,
+  charactersShowing,
   charAttacks,
-  character,
-  characters,
-  enemyCharacterSelected,
-  setEnemyCharacterSelected,
-  selectionArray,
-  setSelectionArray,
-  enemyIndex,
-  setEnemyIndex,
-  enemyAttacks,
-  setEnemyAttacks,
+  userCharacterName,
+  showAttacks,
+  setUserAttacks,
   getEnemyCharacter,
-  setMatchAttacks,
-  matchAttacks,
-  selecArray,
+  userAttacksArray,
   attackSelected0,
   attackSelected1,
   attackSelected2,
   attackSelected3,
   attackSelected4,
-  showEnemyButton,
+  showPlayButton,
   setAttackSelected0,
   setAttackSelected1,
   setAttackSelected2,
   setAttackSelected3,
   setAttackSelected4,
-  setShowEnemyButton,
+  setShowPlayButton,
 }) => {
-  /* const [attackSelected0, setAttackSelected0] = useState(false);
-  const [attackSelected1, setAttackSelected1] = useState(false);
-  const [attackSelected2, setAttackSelected2] = useState(false);
-  const [attackSelected3, setAttackSelected3] = useState(false);
-  const [attackSelected4, setAttackSelected4] = useState(false);
-
-  const [showEnemyButton, setShowEnemyButton] = useState(false); */
-
+ 
   useEffect(() => {
-    if (selecArray.length === 5) {
-      setShowEnemyButton(true);
+    if (userAttacksArray.length === 5) {
+      setShowPlayButton(true);
     }
   }, [
     attackSelected0,
@@ -68,8 +52,8 @@ const Attacks = ({
 
   const clickHandler = (id, name, power) => {
     if (arrayAttackSelected[id] === false) {
-      selecArray.push({ id, name, power });
-      setSelectionArray(selecArray);
+      userAttacksArray.push({ id, name, power });
+      setUserAttacks(userAttacksArray);
       arraySetAttackSelected[id](true);      
     }
   };
@@ -78,14 +62,14 @@ const Attacks = ({
     <>
       <div
         className={
-          charShowing
+          charactersShowing
             ? "displayNone"
-            : enemyCharacterSelected
+            : showAttacks
               ? "attacksFlex"
               : "displayNone"
         }
       >
-        <h3 className="name-selection">You: {character}</h3>
+        <h3 className="name-selection">You: {userCharacterName}</h3>
         <h4 className="attacks-title">Select your attacks:</h4>
         <ul id="attacks">
           {charAttacks &&
@@ -105,7 +89,7 @@ const Attacks = ({
         </ul>
         <button
           id="get-enemy-character"
-          className={showEnemyButton ? "displayBlock" : "displayNone"}
+          className={showPlayButton ? "displayBlock" : "displayNone"}
           onClick={getEnemyCharacter}
         >
           Go!

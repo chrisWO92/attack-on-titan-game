@@ -2,21 +2,13 @@ import React from "react";
 import "./result.css";
 
 const Result = ({
-  enemyCharacterSelected,
-  enemy,
   enemyName,
-  enemyIndex,
-  setEnemyIndex,
-  characters,
   enemyAttacks,
-  selectionArray,
-  matchAttacks,
-  character,
+  userAttacks,
+  userCharacterName,
   playAgain,
-  setShowResults,
   showResults
 }) => {
-  //const randomEnemyAttacks = enemyAttacks.map(value => ({value, sort: Math.random()})).sort((a, b) => a.sort - b.sort).map(({value}) => value)
 
   const match = () => {
     let array = [];
@@ -26,10 +18,10 @@ const Result = ({
     let loses = 0;
     let draws = 0;
     for (let i = 0; i < enemyAttacks.length; i++) {
-      if (selectionArray[i].power === enemyAttacks[i].power) {
+      if (userAttacks[i].power === enemyAttacks[i].power) {
         result = "D";
         draws++;
-      } else if (selectionArray[i].power < enemyAttacks[i].power) {
+      } else if (userAttacks[i].power < enemyAttacks[i].power) {
         result = "L";
         loses++;
       } else {
@@ -38,7 +30,7 @@ const Result = ({
       }
       array.push({
         id: i,
-        userAttack: selectionArray[i],
+        userAttack: userAttacks[i],
         matchResult: result,
         enemyAttack: enemyAttacks[i],
       });
@@ -64,9 +56,9 @@ const Result = ({
         <h2 className="match-title">MATCH RESULTS</h2>
         <div id="result" className="displayFlex">
           <ul id="user-attacks">
-            <h3 className="result-title-string">You: {character}</h3>
-            {selectionArray &&
-              selectionArray.map(({ id, name, power }) => {
+            <h3 className="result-title-string">You: {userCharacterName}</h3>
+            {userAttacks &&
+              userAttacks.map(({ id, name, power }) => {
                 return (
                   <li key={id} className="user-attack">
                     {name}: {power}

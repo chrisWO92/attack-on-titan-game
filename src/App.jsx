@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Attacks from "./components/attacks/Attacks";
 import Characters from "./components/characters/Characters";
@@ -15,7 +15,7 @@ import IMG7 from "./assets/jaw-titan.png";
 import IMG8 from "./assets/cart-titan.png";
 import Result from "./components/result/Result";
 
-let canvaVariables = {
+let canvaDefaultVariables = {
   x: 3,
   y: 3,
   width: 30,
@@ -24,7 +24,7 @@ let canvaVariables = {
   speedY: 0,
 };
 
-const characters = [
+const charactersData = [
   {
     id: "0",
     name: "Attack on Titan",
@@ -139,74 +139,61 @@ const characters = [
   },
 ];
 
-let enemyIMGArraray = []
+let enemiesImagesArray = []
 
-for (let i = 0; i < characters.length; i++) {
-  enemyIMGArraray.push({pic: characters[i].picture, x: characters[i].x, y: characters[i].y, name: characters[i].name, id: characters[i].id})
+for (let i = 0; i < charactersData.length; i++) {
+  enemiesImagesArray.push({
+    pic: charactersData[i].picture, 
+    x: charactersData[i].x, 
+    y: charactersData[i].y, 
+    name: charactersData[i].name, 
+    id: charactersData[i].id
+  })
 }
 
-let selecArray = [];
+let userAttacksArray = []
 
 function App() {
-  const [character, setCharacter] = useState("");
-  const [selected, setSelected] = useState(false);
-  const [charShowing, setCharShowing] = useState(true);
+
+  const [charactersShowing, setCharactersShowing] = useState(true);
+
+  const [userCharacterName, setUserCharacterName] = useState("");
+  const [characterSelected, setCharacterSelected] = useState(false);
   const [charAttacks, setCharAttacks] = useState([]);
-  const [enemyCharacterSelected, setEnemyCharacterSelected] = useState(false);
-  const [enemy, setEnemy] = useState(null);
+  const [userImage, setUserImage] = useState(null);
+
+  const [showAttacks, setShowAttacks] = useState(false);
   const [enemyIndex, setEnemyIndex] = useState(null);
   const [enemyName, setEnemyName] = useState("");
   const [enemyAttacks, setEnemyAttacks] = useState([]);
+  const [enemySelected, setEnemySelected] = useState(false);
 
-  const [selectionArray, setSelectionArray] = useState([]);
-  const [matchAttacks, setMatchAttacks] = useState([]);
-
+  const [userAttacks, setUserAttacks] = useState([]);
   const [attackSelected0, setAttackSelected0] = useState(false);
   const [attackSelected1, setAttackSelected1] = useState(false);
   const [attackSelected2, setAttackSelected2] = useState(false);
   const [attackSelected3, setAttackSelected3] = useState(false);
   const [attackSelected4, setAttackSelected4] = useState(false);
 
-  const [showEnemyButton, setShowEnemyButton] = useState(false);
-
-  const [showCanvaMap, setShowCanvaMap] = useState(false);
-
+  const [showPlayButton, setShowPlayButton] = useState(false);
   const [showResults, setShowResults] = useState(false);
-
-  const [characterIndex, setCharacterIndex] = useState(null);
-  const [pic, setPic] = useState(null);
-  const [canvas, setCanvas] = useState(canvaVariables);
-  const [enemySelected, setEnemySelected] = useState(false);
-
-  useEffect(() => {
-    console.log(enemy);
-    console.log(enemyIndex);
-    console.log(enemyName);
-    console.log(enemyAttacks);
-    console.log(selectionArray);
-  }, [enemy, enemyIndex, enemyAttacks, selectionArray]);
+  
+  const [showCanvaMap, setShowCanvaMap] = useState(false);
+  const [canvas, setCanvas] = useState(canvaDefaultVariables);
 
   const charactersHidding = () => {
-    if (selected) {
-      setCharShowing(false);
+    if (characterSelected) {
+      setCharactersShowing(false);
       setShowCanvaMap(true);
     }
-    console.log(enemyIMGArraray)
   };
 
-  /* const randomIntFromInterval = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }; */
 
   const getEnemyCharacter = () => {
-    //const index = randomIntFromInterval(0, characters.length - 1);
-    setEnemyCharacterSelected(false);
+    setShowAttacks(false);
     setShowResults(true);
-    /* setEnemyIndex(index);
-    setEnemy(characters[index]);
-    setEnemyName(characters[index].name); */
     setEnemyAttacks(
-      characters[enemyIndex].attacks
+      charactersData[enemyIndex].attacks
         .map((value) => ({ value, sort: Math.random() }))
         .sort((a, b) => a.sort - b.sort)
         .map(({ value }) => value)
@@ -214,18 +201,16 @@ function App() {
   };
 
   const playAgain = () => {
-    setCharacter("");
-    setSelected(false);
-    setCharShowing(true);
+    setUserCharacterName("");
+    setCharacterSelected(false);
+    setCharactersShowing(true);
     setCharAttacks([]);
-    setEnemyCharacterSelected(false);
-    setEnemy(null);
+    setShowAttacks(false);
     setEnemyIndex(null);
     setEnemyName("");
     setEnemyAttacks([]);
-    setSelectionArray([]);
-    setMatchAttacks([]);
-    setShowEnemyButton(false);
+    setUserAttacks([]);
+    setShowPlayButton(false);
     setAttackSelected0(false);
     setAttackSelected1(false);
     setAttackSelected2(false);
@@ -233,94 +218,73 @@ function App() {
     setAttackSelected4(false);
     setShowCanvaMap(false);
     setShowResults(false);
-    setCanvas(canvaVariables);
+    setCanvas(canvaDefaultVariables);
     setEnemySelected(false);
-    selecArray = [];
+    userAttacksArray = [];
   };
 
   const mapHiding = () => {
     setShowCanvaMap(false)
-    setEnemyCharacterSelected(true);
+    setShowAttacks(true);
   }
 
   return (
     <>
       <ImageBg />
       <Characters
-        characters={characters}
-        character={character}
-        setCharacter={setCharacter}
-        setSelected={setSelected}
-        charShowing={charShowing}
+        charactersData={charactersData}
+        userCharacterName={userCharacterName}
+        setUserCharacterName={setUserCharacterName}
+        setCharacterSelected={setCharacterSelected}
+        charactersShowing={charactersShowing}
         charactersHidding={charactersHidding}
         setCharAttacks={setCharAttacks}
-        characterIndex={characterIndex}
-        setCharacterIndex={setCharacterIndex}
-        pic={pic}
-        setPic={setPic}
+        userImage={userImage}
+        setUserImage={setUserImage}
       />
       <Map
-        charShowing={charShowing}
+        charactersShowing={charactersShowing}
         showCanvaMap={showCanvaMap}
-        setShowCanvaMap={setShowCanvaMap}
         mapHiding={mapHiding}
-        characters={characters}
-        characterIndex={characterIndex}
-        pic={pic}
+        charactersData={charactersData}
+        userImage={userImage}
         canvas={canvas}
         setCanvas={setCanvas}
-        enemyIMGArraray={enemyIMGArraray}
+        enemiesImagesArray={enemiesImagesArray}
         setEnemyIndex={setEnemyIndex}
-        setEnemy={setEnemy}
-        enemyName={enemyName}
         setEnemyName={setEnemyName}
+        enemyName={enemyName}
         enemySelected={enemySelected}
         setEnemySelected={setEnemySelected}
       />
       <Attacks
-        getEnemyCharacter={getEnemyCharacter}
-        enemyAttacks={enemyAttacks}
-        setEnemyAttacks={setEnemyAttacks}
-        enemyIndex={enemyIndex}
-        setEnemyIndex={setEnemyIndex}
-        enemyCharacterSelected={enemyCharacterSelected}
-        setEnemyCharacterSelected={setEnemyCharacterSelected}
-        characters={characters}
-        charShowing={charShowing}
+        charactersShowing={charactersShowing}
         charAttacks={charAttacks}
-        character={character}
-        matchAttacks={matchAttacks}
-        setMatchAttacks={setMatchAttacks}
-        setSelectionArray={setSelectionArray}
-        selecArray={selecArray}
+        userCharacterName={userCharacterName}
+        showAttacks={showAttacks}
+        setUserAttacks={setUserAttacks}
+        getEnemyCharacter={getEnemyCharacter}
+        userAttacksArray={userAttacksArray}
         attackSelected0={attackSelected0}
         attackSelected1={attackSelected1}
         attackSelected2={attackSelected2}
         attackSelected3={attackSelected3}
         attackSelected4={attackSelected4}
-        showEnemyButton={showEnemyButton}
+        showPlayButton={showPlayButton}
         setAttackSelected0={setAttackSelected0}
         setAttackSelected1={setAttackSelected1}
         setAttackSelected2={setAttackSelected2}
         setAttackSelected3={setAttackSelected3}
         setAttackSelected4={setAttackSelected4}
-        setShowEnemyButton={setShowEnemyButton}
+        setShowPlayButton={setShowPlayButton}
       />
       <Result
-        enemy={enemy}
         enemyName={enemyName}
-        enemyIndex={enemyIndex}
-        setEnemyIndex={setEnemyIndex}
-        enemyCharacterSelected={enemyCharacterSelected}
-        setEnemyCharacterSelected={setEnemyCharacterSelected}
-        characters={characters}
         enemyAttacks={enemyAttacks}
-        selectionArray={selectionArray}
-        matchAttacks={matchAttacks}
-        character={character}
+        userAttacks={userAttacks}
+        userCharacterName={userCharacterName}
         playAgain={playAgain}
         showResults={showResults}
-        setShowResults={setShowResults}
       />
     </>
   );

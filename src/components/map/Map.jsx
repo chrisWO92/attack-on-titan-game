@@ -10,18 +10,15 @@ import {AiOutlineArrowRight} from 'react-icons/ai'
 let interval
 
 const Map = ({
-  charShowing,
+  charactersShowing,
   showCanvaMap,
-  setShowCanvaMap,
   mapHiding,
-  characters,
-  characterIndex,
-  pic,
+  charactersData,
+  userImage,
   canvas, 
   setCanvas,
-  enemyIMGArraray,
+  enemiesImagesArray,
   setEnemyIndex,
-  setEnemy,
   setEnemyName,
   enemyName,
   enemySelected,
@@ -38,24 +35,14 @@ const Map = ({
   mapBG.src = mapBGsrc;
 
   let charIMG = new Image();
-  charIMG.src = pic;
+  charIMG.src = userImage;
 
   let enemyIMG = []
 
-/*   const map2 = canvasRef.current;
-  const lienzo2 = map2.getContext("2d") */
-
-  for (let i = 0; i < enemyIMGArraray.length; i++) {
+  for (let i = 0; i < enemiesImagesArray.length; i++) {
     let img = new Image()
-    img.src = enemyIMGArraray[i].pic
+    img.src = enemiesImagesArray[i].pic
     enemyIMG.push(img)
-    /* lienzo2.drawImage(
-      enemyIMG[0],
-      enemyIMGArraray[0].x,
-      enemyIMGArraray[0].y,
-      canvas.width,
-      canvas.height
-    ); */
   }
 
   const drawEnemies = () => {
@@ -64,8 +51,8 @@ const Map = ({
     for (let i = 0; i < enemyIMG.length; i++) {
       lienzo.drawImage(
         enemyIMG[i],
-        enemyIMGArraray[i].x,
-        enemyIMGArraray[i].y,
+        enemiesImagesArray[i].x,
+        enemiesImagesArray[i].y,
         canvas.width,
         canvas.height
       );
@@ -92,10 +79,9 @@ const Map = ({
       ) {
         return
     }
-    setEnemyIndex(enemy.id);
-    setEnemy(characters[enemy.id]);
-    setEnemyName(characters[enemy.id].name);
     setEnemySelected(true)
+    setEnemyIndex(enemy.id);
+    setEnemyName(charactersData[enemy.id].name);
   }
 
   const drawCanvas = () => {
@@ -141,8 +127,8 @@ const Map = ({
     drawCanvas()
     drawEnemies()
     if (canvas.speedX || canvas.speedY) {
-      for (let i = 0; i < enemyIMGArraray.length; i++){
-        colission(enemyIMGArraray[i])
+      for (let i = 0; i < enemiesImagesArray.length; i++){
+        colission(enemiesImagesArray[i])
       }
     }
   })
@@ -213,7 +199,7 @@ const Map = ({
     <>
       <div
         className={
-          charShowing
+          charactersShowing
             ? "displayNone"
             : showCanvaMap
             ? "canvaMap"

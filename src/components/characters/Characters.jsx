@@ -4,40 +4,32 @@ import "./characters.css";
 import Card from "../card/Card";
 
 const Characters = ({
-  characters,
-  character,
-  setCharacter,
-  setSelected,
-  charShowing,
+  charactersData,
+  userCharacterName,
+  setUserCharacterName,
+  setCharacterSelected,
+  charactersShowing,
   charactersHidding,
   setCharAttacks,
-  characterIndex,
-  setCharacterIndex,
-  pic,
-  setPic
+  setUserImage
 }) => {
   return (
     <>
-      <div className={charShowing ? "characters-container" : "displayNone"}>
+      <div className={charactersShowing ? "characters-container" : "displayNone"}>
         <h2 className="section-title">Select Your Titan</h2>
         <div id="characters">
-          {characters &&
-            characters.map(({ id, name, picture, attacks }) => {
+          {charactersData &&
+            charactersData.map(({ id, name, picture, attacks }) => {
               return (
                 <Card
                   key={id}
-                  index={id}
-                  name={name}
                   picture={picture}
                   attacks={attacks}
-                  setCharacter={setCharacter}
-                  character={character}
-                  setSelected={setSelected}
+                  setUserCharacterName={setUserCharacterName}
+                  userCharacterName={userCharacterName}
+                  setCharacterSelected={setCharacterSelected}
                   setCharAttacks={setCharAttacks}
-                  characterIndex={characterIndex}
-                  setCharacterIndex={setCharacterIndex}
-                  pic={pic}
-                  setPic={setPic}
+                  setUserImage={setUserImage}
                 />
               );
             })}
