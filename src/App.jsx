@@ -14,6 +14,7 @@ import IMG6 from "./assets/warhammer-titan.png";
 import IMG7 from "./assets/jaw-titan.png";
 import IMG8 from "./assets/cart-titan.png";
 import Result from "./components/result/Result";
+//import { useEffect } from "react";
 
 let canvaDefaultVariables = {
   x: 3,
@@ -160,7 +161,7 @@ function App() {
   const [userCharacterName, setUserCharacterName] = useState("");
   const [characterSelected, setCharacterSelected] = useState(false);
   const [charAttacks, setCharAttacks] = useState([]);
-  const [userImage, setUserImage] = useState(null);
+  const [userId, setUserId] = useState('');
 
   const [showAttacks, setShowAttacks] = useState(false);
   const [enemyIndex, setEnemyIndex] = useState(null);
@@ -180,6 +181,16 @@ function App() {
   
   const [showCanvaMap, setShowCanvaMap] = useState(false);
   const [canvas, setCanvas] = useState(canvaDefaultVariables);
+
+ /*  const join = () => {
+    fetch('http://localhost:8080/join')
+      .then(res => console.log(res))
+  }
+
+  useEffect(() => {
+    join()
+  }, []) */
+
 
   const charactersHidding = () => {
     if (characterSelected) {
@@ -239,15 +250,15 @@ function App() {
         charactersShowing={charactersShowing}
         charactersHidding={charactersHidding}
         setCharAttacks={setCharAttacks}
-        userImage={userImage}
-        setUserImage={setUserImage}
+        userId={userId}
+        setUserId={setUserId}
       />
       <Map
         charactersShowing={charactersShowing}
         showCanvaMap={showCanvaMap}
         mapHiding={mapHiding}
         charactersData={charactersData}
-        userImage={userImage}
+        userId={userId}
         canvas={canvas}
         setCanvas={setCanvas}
         enemiesImagesArray={enemiesImagesArray}

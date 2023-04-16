@@ -3,20 +3,22 @@ import "./card.css";
 
 const Card = ({
   name,
+  index,
   picture,
   attacks,
   setUserCharacterName,
   userCharacterName,
   setCharacterSelected,
   setCharAttacks,
-  setUserImage
+  setUserId
 }) => {
 
   const characterSelection = () => {
     setUserCharacterName(name);
     setCharacterSelected(true);
     setCharAttacks(attacks);
-    setUserImage(picture);
+    console.log(index)
+    setUserId(index);
   };
 
   return (
