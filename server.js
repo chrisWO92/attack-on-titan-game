@@ -1,35 +1,32 @@
-/* const express = require("express")
+const express = require('express')
 const app = express()
-const port = process.env.PORT || 8080
+const path = require('path')
+const cors = require('cors')
 
-const cors = require("cors")
+app.use(express.static(path.join(__dirname, 'build')))
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
+
 app.use(cors())
 app.use(express.json())
 
-const jugadores = []
+const users = []
 
-class Jugador {
-    constructor(id){
+class User {
+    constructor(id) {
         this.id = id
     }
 }
 
-//when recives a request in main / then answer whith "hola"
 app.get('/join', (req, res) => {
     const id = `${Math.random()}`
-    const jugador = new Jugador(id)
-    jugadores.push(jugador)
+    const user = new User(id)
+    users.push(user)
+    res.setHeader("Access-Control-Allow-Origin", '*')
     res.send(id)
 })
 
-app.post('/attack-on-titan/:userId', (req, res) => {
-    const userId = req.params.userId || ''
-    console.log(users)
-    console.log(userId)
-    res.end()
+app.listen(8080, () => {
+    console.log('Servidor Funcionando')
 })
-
-//listen continually any request on port 8080
-app.listen(port, () => {
-    console.log("Server Working")
-}) */

@@ -182,14 +182,14 @@ function App() {
   const [showCanvaMap, setShowCanvaMap] = useState(false);
   const [canvas, setCanvas] = useState(canvaDefaultVariables);
 
-/*   const join = () => {
+  const join = () => {
     fetch('http://localhost:8080/join')
       .then(res => console.log(res))
   }
 
   useEffect(() => {
     join()
-  }, []) */
+  }, [])
 
 
   const charactersHidding = () => {
