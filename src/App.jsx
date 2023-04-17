@@ -14,7 +14,7 @@ import IMG6 from "./assets/warhammer-titan.png";
 import IMG7 from "./assets/jaw-titan.png";
 import IMG8 from "./assets/cart-titan.png";
 import Result from "./components/result/Result";
-//import { useEffect } from "react";
+import { useEffect } from "react";
 
 let canvaDefaultVariables = {
   x: 3,
@@ -182,7 +182,7 @@ function App() {
   const [showCanvaMap, setShowCanvaMap] = useState(false);
   const [canvas, setCanvas] = useState(canvaDefaultVariables);
 
- /*  const join = () => {
+/*   const join = () => {
     fetch('http://localhost:8080/join')
       .then(res => console.log(res))
   }

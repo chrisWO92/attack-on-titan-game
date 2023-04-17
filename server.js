@@ -1,6 +1,10 @@
-const express = require("express")
+/* const express = require("express")
 const app = express()
 const port = process.env.PORT || 8080
+
+const cors = require("cors")
+app.use(cors())
+app.use(express.json())
 
 const jugadores = []
 
@@ -18,7 +22,14 @@ app.get('/join', (req, res) => {
     res.send(id)
 })
 
+app.post('/attack-on-titan/:userId', (req, res) => {
+    const userId = req.params.userId || ''
+    console.log(users)
+    console.log(userId)
+    res.end()
+})
+
 //listen continually any request on port 8080
 app.listen(port, () => {
     console.log("Server Working")
-})
+}) */
