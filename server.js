@@ -59,10 +59,9 @@ app.post('/attack-on-titan/:playerId', (req, res) => {
     if (playerIndex >= 0) {
         players[playerIndex].assignTItan(titan)
     }
-
-    console.log(players)
-    console.log(playerId)
     //in post request it's neccesary to end the endpoint
+    console.log(playerId)
+    console.log(players)
     res.end()
 })
 

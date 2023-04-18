@@ -191,31 +191,34 @@ function App() {
         if (res.ok) {
           res.text()
             .then((res) => {
-              console.log(res)
               playerId = res
+              console.log(playerId)
               //shows the id
             })
         }
       })
   }
 
-  const selectTitan = (name) => {
+  const selectTitan = (titName) => {
     fetch(`http://localhost:8080/attack-on-titan/${playerId}`, {
       //when doing a post request it's need the method specification, header specification, and body info it's being sent to server
       method: 'post',
-      header: {
-        'Content-type': 'application/json'
+      headers: {
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        titan: name
+        titan: titName
       })
       //now we're not going to use .then becuase we aren't expecting a response, but later on we're going to use it
     })
   }
 
+  //i'm having an issue
+  //i'm not being able to send the value of a state through the selectitan post request. Why? I'll see tomorrow
+
   useEffect(() => {
     console.log(userCharacterName)
-    selectTitan(userCharacterName)
+    
   }, [userCharacterName])
 
   useEffect(() => {
@@ -226,7 +229,7 @@ function App() {
     if (characterSelected) {
       setCharactersShowing(false);
       setShowCanvaMap(true);
-      //selectTitan(userCharacterName)
+      selectTitan(userCharacterName)
     }
   };
 
