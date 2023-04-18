@@ -11,7 +11,7 @@ const Characters = ({
   charactersShowing,
   charactersHidding,
   setCharAttacks,
-  setUserId
+  setUserId,
 }) => {
   return (
     <>

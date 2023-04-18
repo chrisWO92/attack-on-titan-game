@@ -10,14 +10,15 @@ const Card = ({
   userCharacterName,
   setCharacterSelected,
   setCharAttacks,
-  setUserId
+  setUserId,
+  selectTitan
 }) => {
 
   const characterSelection = () => {
     setUserCharacterName(name);
+    //selectTitan(userCharacterName)
     setCharacterSelected(true);
     setCharAttacks(attacks);
-    console.log(index)
     setUserId(index);
   };
 

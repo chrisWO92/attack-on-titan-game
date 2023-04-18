@@ -154,11 +154,13 @@ for (let i = 0; i < charactersData.length; i++) {
 
 let userAttacksArray = []
 
+let playerId = null
+
 function App() {
 
   const [charactersShowing, setCharactersShowing] = useState(true);
 
-  const [userCharacterName, setUserCharacterName] = useState("");
+  const [userCharacterName, setUserCharacterName] = useState("holi");
   const [characterSelected, setCharacterSelected] = useState(false);
   const [charAttacks, setCharAttacks] = useState([]);
   const [userId, setUserId] = useState('');
@@ -182,20 +184,49 @@ function App() {
   const [showCanvaMap, setShowCanvaMap] = useState(false);
   const [canvas, setCanvas] = useState(canvaDefaultVariables);
 
+  //endpoint consumption
   const join = () => {
     fetch('http://localhost:8080/join')
-      .then(res => console.log(res))
+      .then(res => {
+        if (res.ok) {
+          res.text()
+            .then((res) => {
+              console.log(res)
+              playerId = res
+              //shows the id
+            })
+        }
+      })
   }
+
+  const selectTitan = (name) => {
+    fetch(`http://localhost:8080/attack-on-titan/${playerId}`, {
+      //when doing a post request it's need the method specification, header specification, and body info it's being sent to server
+      method: 'post',
+      header: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        titan: name
+      })
+      //now we're not going to use .then becuase we aren't expecting a response, but later on we're going to use it
+    })
+  }
+
+  useEffect(() => {
+    console.log(userCharacterName)
+    selectTitan(userCharacterName)
+  }, [userCharacterName])
 
   useEffect(() => {
     join()
   }, [])
 
-
   const charactersHidding = () => {
     if (characterSelected) {
       setCharactersShowing(false);
       setShowCanvaMap(true);
+      //selectTitan(userCharacterName)
     }
   };
 
@@ -252,6 +283,7 @@ function App() {
         setCharAttacks={setCharAttacks}
         userId={userId}
         setUserId={setUserId}
+        selectTitan={selectTitan}
       />
       <Map
         charactersShowing={charactersShowing}
