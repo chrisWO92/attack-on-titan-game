@@ -218,12 +218,15 @@ function App() {
 
   useEffect(() => {
     console.log(userCharacterName)
+    if (characterSelected){
+      join()
+    }
     
-  }, [userCharacterName])
+  }, [characterSelected])
 
-  useEffect(() => {
-    join()
-  }, [])
+/*   useEffect(() => {
+    
+  }, []) */
 
   const charactersHidding = () => {
     if (characterSelected) {
