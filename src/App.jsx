@@ -141,8 +141,10 @@ const charactersData = [
 ];
 
 let enemiesImagesArray = []
+let enemiesToDisplay = []
+let enemiesFromBackend = []
 
-for (let i = 0; i < charactersData.length; i++) {
+/* for (let i = 0; i < charactersData.length; i++) {
   enemiesImagesArray.push({
     pic: charactersData[i].picture, 
     x: charactersData[i].x, 
@@ -150,7 +152,7 @@ for (let i = 0; i < charactersData.length; i++) {
     name: charactersData[i].name, 
     id: charactersData[i].id
   })
-}
+} */
 
 let userAttacksArray = []
 
@@ -160,7 +162,7 @@ function App() {
 
   const [charactersShowing, setCharactersShowing] = useState(true);
 
-  const [userCharacterName, setUserCharacterName] = useState("holi");
+  const [userCharacterName, setUserCharacterName] = useState("");
   const [characterSelected, setCharacterSelected] = useState(false);
   const [charAttacks, setCharAttacks] = useState([]);
   const [userId, setUserId] = useState('');
@@ -229,16 +231,28 @@ function App() {
           res.json()
             .then(({enemies}) => {
               console.log(enemies)
+              enemies.forEach((enemie) => {
+                for (let i = 0; i < charactersData.length; i++) {
+                  if (enemies.length >= 1) {
+                    const nameEnemy = enemie.titan.name
+                    if (nameEnemy === charactersData[i].name) {
+                      enemiesImagesArray.push({
+                        pic: charactersData[i].picture, 
+                        x: charactersData[i].x, 
+                        y: charactersData[i].y, 
+                        name: charactersData[i].name, 
+                        id: charactersData[i].id
+                      })
+                    }
+                  }
+                }
+              })
             })
         }
       })
   }
 
-  //i'm having an issue
-  //i'm not being able to send the value of a state through the selectitan post request. Why? I'll see tomorrow
-
   useEffect(() => {
-    console.log(userCharacterName)
     if (characterSelected){
       join()
     }
