@@ -213,6 +213,27 @@ function App() {
     })
   }
 
+  const sendPosition = (x, y) => {
+    fetch(`http://localhost:8080/attack-on-titan/${playerId}/position`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        x,
+        y
+      })
+    })
+      .then((res) => {
+        if (res.ok){
+          res.json()
+            .then(({enemies}) => {
+              console.log(enemies)
+            })
+        }
+      })
+  }
+
   //i'm having an issue
   //i'm not being able to send the value of a state through the selectitan post request. Why? I'll see tomorrow
 
@@ -223,10 +244,6 @@ function App() {
     }
     
   }, [characterSelected])
-
-/*   useEffect(() => {
-    
-  }, []) */
 
   const charactersHidding = () => {
     if (characterSelected) {
@@ -305,6 +322,7 @@ function App() {
         enemyName={enemyName}
         enemySelected={enemySelected}
         setEnemySelected={setEnemySelected}
+        sendPosition={sendPosition}
       />
       <Attacks
         charactersShowing={charactersShowing}

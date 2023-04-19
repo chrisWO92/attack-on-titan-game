@@ -31,6 +31,7 @@ const Map = ({
   enemyName,
   enemySelected,
   setEnemySelected,
+  sendPosition
 }) => {
   const canvasRef = useRef();
 
@@ -116,6 +117,8 @@ const Map = ({
     setEnemyName(charactersData[enemy.id].name);
   };
 
+  
+
   const drawCanvas = () => {
     const map = canvasRef.current;
     const lienzo = map.getContext("2d");
@@ -124,6 +127,7 @@ const Map = ({
     lienzo.clearRect(0, 0, map.width, map.height);
     lienzo.drawImage(mapBG, 0, 0, map.width, map.height);
     lienzo.drawImage(charIMG, canvas.x, canvas.y, canvas.width, canvas.height);
+    sendPosition(canvas.x, canvas.y)
   };
 
   const repeat = (what) => {

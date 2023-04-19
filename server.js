@@ -22,6 +22,12 @@ class Player {
     assignTItan(titan) {
         this.titan = titan
     }
+
+    //update position
+    updatePosition(x, y) {
+        this.x = x
+        this.y = y
+    }
 }
 
 class Titan {
@@ -62,6 +68,25 @@ app.post('/attack-on-titan/:playerId', (req, res) => {
     //in post request it's neccesary to end the endpoint
     console.log(playerId)
     console.log(players)
+    res.end()
+})
+
+app.post('/attack-on-titan/:playerId/position', (req, res) => {
+    const playerId = req.params.playerId || ""
+    const x = req.body.x || 0
+    const y = req.body.y || 0
+    const playerIndex = players.findIndex((player) => playerId === player.id)
+    if (playerIndex >= 0) {
+        players[playerIndex].updatePosition(x, y)
+    }
+
+    //function to create an array with all the players less the current player
+    const enemies = players.filter((player) => playerId !== player.id)
+
+    res.send({
+        enemies
+    })
+
     res.end()
 })
 
