@@ -256,14 +256,29 @@ function App() {
     if (characterSelected){
       join()
     }
-    
   }, [characterSelected])
+
+  const updateUserPosition = () => {
+    
+    for (let i of charactersData) {
+      if (i.name === userCharacterName) {
+        return [i.x, i.y]
+      }      
+    }
+    
+  }
 
   const charactersHidding = () => {
     if (characterSelected) {
       setCharactersShowing(false);
       setShowCanvaMap(true);
       selectTitan(userCharacterName)
+      let position = updateUserPosition();
+      setCanvas((canvas) => ({
+        ...canvas,
+        x: position[0],
+        y: position[1]
+      }));
     }
   };
 
@@ -337,6 +352,7 @@ function App() {
         enemySelected={enemySelected}
         setEnemySelected={setEnemySelected}
         sendPosition={sendPosition}
+        userCharacterName={userCharacterName}
       />
       <Attacks
         charactersShowing={charactersShowing}

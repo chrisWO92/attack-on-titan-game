@@ -31,7 +31,8 @@ const Map = ({
   enemyName,
   enemySelected,
   setEnemySelected,
-  sendPosition
+  sendPosition,
+  userCharacterName,
 }) => {
   const canvasRef = useRef();
 
@@ -93,6 +94,23 @@ const Map = ({
     }
   };
 
+  const drawCanvas = () => {
+    const map = canvasRef.current;
+    const lienzo = map.getContext("2d");
+    canvas.x = canvas.x + canvas.speedX;
+    canvas.y = canvas.y + canvas.speedY;
+    lienzo.clearRect(0, 0, map.width, map.height);
+    lienzo.drawImage(mapBG, 0, 0, map.width, map.height);
+    lienzo.drawImage(
+      charIMG, 
+      canvas.x, 
+      canvas.y, 
+      canvas.width, 
+      canvas.height
+      );
+    sendPosition(canvas.x, canvas.y);
+  };
+
   const colission = (enemy) => {
     const bottomSideCharacter = canvas.y + canvas.height;
     const topSideCharacter = canvas.y;
@@ -115,19 +133,6 @@ const Map = ({
     setEnemySelected(true);
     setEnemyIndex(enemy.id);
     setEnemyName(charactersData[enemy.id].name);
-  };
-
-  
-
-  const drawCanvas = () => {
-    const map = canvasRef.current;
-    const lienzo = map.getContext("2d");
-    canvas.x = canvas.x + canvas.speedX;
-    canvas.y = canvas.y + canvas.speedY;
-    lienzo.clearRect(0, 0, map.width, map.height);
-    lienzo.drawImage(mapBG, 0, 0, map.width, map.height);
-    lienzo.drawImage(charIMG, canvas.x, canvas.y, canvas.width, canvas.height);
-    sendPosition(canvas.x, canvas.y)
   };
 
   const repeat = (what) => {
