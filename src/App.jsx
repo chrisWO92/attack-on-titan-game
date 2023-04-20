@@ -19,8 +19,8 @@ import { useEffect } from "react";
 let canvaDefaultVariables = {
   x: 3,
   y: 3,
-  width: 30,
-  height: 25,
+  width: 60,
+  height: 50,
   speedX: 0,
   speedY: 0,
 };
@@ -141,18 +141,6 @@ const charactersData = [
 ];
 
 let enemiesImagesArray = []
-let enemiesToDisplay = []
-let enemiesFromBackend = []
-
-/* for (let i = 0; i < charactersData.length; i++) {
-  enemiesImagesArray.push({
-    pic: charactersData[i].picture, 
-    x: charactersData[i].x, 
-    y: charactersData[i].y, 
-    name: charactersData[i].name, 
-    id: charactersData[i].id
-  })
-} */
 
 let userAttacksArray = []
 
@@ -229,8 +217,7 @@ function App() {
       .then((res) => {
         if (res.ok){
           res.json()
-            .then(({enemies}) => {
-              console.log(enemies)
+            .then(({enemies}) => {        
               enemies.forEach((enemie) => {
                 for (let i = 0; i < charactersData.length; i++) {
                   if (enemies.length >= 1) {

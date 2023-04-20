@@ -18,7 +18,6 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 let interval;
 let heightWeNeed
 let widthMap = window.innerWidth - 30
-console.log(window.innerWidth)
 
 const maxWidthMap = 500
 
@@ -49,11 +48,7 @@ if (window.matchMedia("(orientation: landscape)").matches) {
   }
 }
 
-
-
 heightWeNeed = widthMap * 600/800
-console.log(heightWeNeed)
-console.log(widthMap)
 
 
 const Map = ({
@@ -119,14 +114,20 @@ const Map = ({
     enemyIMG.push(img);
   }
 
+  function randomFromInterval(min, max) { // min and max included 
+    return (Math.random() * (max - min + 1) + min)
+  }
+
   const drawEnemies = () => {
     const map = canvasRef.current;
     const lienzo = map.getContext("2d");
     for (let i = 0; i < enemyIMG.length; i++) {
       lienzo.drawImage(
         enemyIMG[i],
-        enemiesImagesArray[i].x,
-        enemiesImagesArray[i].y,
+        randomFromInterval(0, widthMap - canvas.width),
+        randomFromInterval(0, heightWeNeed - canvas.height),
+        /* enemiesImagesArray[i].x,
+        enemiesImagesArray[i].y, */
         canvas.width,
         canvas.height
       );
@@ -143,9 +144,11 @@ const Map = ({
     lienzo.clearRect(0, 0, map.width, map.height);
     lienzo.drawImage(mapBG, 0, 0, map.width, map.height);
     lienzo.drawImage(
-      charIMG, 
-      canvas.x, 
-      canvas.y, 
+      charIMG,
+      randomFromInterval(0, widthMap - canvas.width),
+      randomFromInterval(0, heightWeNeed - canvas.height), 
+      /* canvas.x, 
+      canvas.y,  */
       canvas.width, 
       canvas.height
       );
