@@ -16,40 +16,6 @@ import { AiOutlineArrowDown } from "react-icons/ai";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
 let interval;
-let heightWeNeed
-let widthMap = window.innerWidth - 30
-
-const maxWidthMap = 500
-
-if (window.matchMedia("(orientation: portrait)").matches) {
-  if (window.innerHeight > 700 && window.innerHeight <= 1100) {
-    if (window.innerWidth < 600 && window.innerWidth >= 500) {
-      widthMap = window.innerWidth - 60
-    } else if ( window.innerWidth < 500) {
-      widthMap = window.innerWidth - 20
-    } else {
-      widthMap = 700
-    }    
-  }
-  if (window.innerHeight > 1100) {
-    if (window.innerWidth < 1000) {
-      widthMap = window.innerWidth - 100
-    } else {
-      widthMap = 900
-    }
-  }
-}
-
-if (window.matchMedia("(orientation: landscape)").matches) {
-  if (window.innerWidth > 1200) {
-    widthMap = 700
-  } else {
-    widthMap = 500
-  }
-}
-
-heightWeNeed = widthMap * 600/800
-
 
 const Map = ({
   charactersShowing,
@@ -67,6 +33,8 @@ const Map = ({
   setEnemySelected,
   sendPosition,
   userCharacterName,
+  heightWeNeed,
+  widthMap
 }) => {
   const canvasRef = useRef();
 
@@ -114,20 +82,14 @@ const Map = ({
     enemyIMG.push(img);
   }
 
-  function randomFromInterval(min, max) { // min and max included 
-    return (Math.random() * (max - min + 1) + min)
-  }
-
   const drawEnemies = () => {
     const map = canvasRef.current;
     const lienzo = map.getContext("2d");
     for (let i = 0; i < enemyIMG.length; i++) {
       lienzo.drawImage(
         enemyIMG[i],
-        randomFromInterval(0, widthMap - canvas.width),
-        randomFromInterval(0, heightWeNeed - canvas.height),
-        /* enemiesImagesArray[i].x,
-        enemiesImagesArray[i].y, */
+        enemiesImagesArray[i].x,
+        enemiesImagesArray[i].y,
         canvas.width,
         canvas.height
       );
@@ -145,10 +107,8 @@ const Map = ({
     lienzo.drawImage(mapBG, 0, 0, map.width, map.height);
     lienzo.drawImage(
       charIMG,
-      randomFromInterval(0, widthMap - canvas.width),
-      randomFromInterval(0, heightWeNeed - canvas.height), 
-      /* canvas.x, 
-      canvas.y,  */
+      canvas.x, 
+      canvas.y, 
       canvas.width, 
       canvas.height
       );
