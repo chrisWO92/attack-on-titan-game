@@ -175,6 +175,7 @@ const Map = ({
   useEffect(() => {
     document.addEventListener("keydown", keyPressed);
     document.addEventListener("keyup", stop);
+    
   }, []);
 
   useEffect(() => {
