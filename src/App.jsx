@@ -16,47 +16,17 @@ import IMG8 from "./assets/cart-titan.png";
 import Result from "./components/result/Result";
 import { useEffect } from "react";
 
-let canvaDefaultVariables = {
+/* let canvaDefaultVariables = {
   x: 3,
   y: 3,
   width: 60,
   height: 50,
   speedX: 0,
   speedY: 0,
-};
+}; */
 
 
-let heightWeNeed
-let widthMap = window.innerWidth - 30
 
-if (window.matchMedia("(orientation: portrait)").matches) {
-  if (window.innerHeight > 700 && window.innerHeight <= 1100) {
-    if (window.innerWidth < 600 && window.innerWidth >= 500) {
-      widthMap = window.innerWidth - 60
-    } else if ( window.innerWidth < 500) {
-      widthMap = window.innerWidth - 20
-    } else {
-      widthMap = 700
-    }    
-  }
-  if (window.innerHeight > 1100) {
-    if (window.innerWidth < 1000) {
-      widthMap = window.innerWidth - 100
-    } else {
-      widthMap = 900
-    }
-  }
-}
-
-if (window.matchMedia("(orientation: landscape)").matches) {
-  if (window.innerWidth > 1200) {
-    widthMap = 700
-  } else {
-    widthMap = 500
-  }
-}
-
-heightWeNeed = widthMap * 600/800
 
 let enemiesImagesArray = []
 
@@ -64,143 +34,10 @@ let userAttacksArray = []
 
 let playerId = null
 
-function randomFromInterval(min, max) { // min and max included 
-  return (Math.random() * (max - min + 1) + min)
-}
-
-const charactersData = [
-  {
-    id: "0",
-    name: "Attack on Titan",
-    picture: IMG1,
-    attacks: [
-      { id: 0, name: "Melee Fight", power: 8 },
-      { id: 1, name: "Intelligence", power: 7 },
-      { id: 2, name: "Strength", power: 8 },
-      { id: 3, name: "Stamina", power: 10 },
-      { id: 4, name: "Hardening", power: 10 },
-    ],
-    x: randomFromInterval(0, widthMap - canvaDefaultVariables.width),
-    y: randomFromInterval(0, heightWeNeed - canvaDefaultVariables.height),
-    /* x: 150,
-    y: 60 */
-  },
-  {
-    id: "1",
-    name: "Female Titan",
-    picture: IMG2,
-    attacks: [
-      { id: 0, name: "Melee Fight", power: 9 },
-      { id: 1, name: "Intelligence", power: 8 },
-      { id: 2, name: "Strength", power: 7 },
-      { id: 3, name: "Armor", power: 7 },
-      { id: 4, name: "Scream Suicide", power: 10 },
-    ],
-    x: randomFromInterval(0, widthMap - canvaDefaultVariables.width),
-    y: randomFromInterval(0, heightWeNeed - canvaDefaultVariables.height),
-    /* x: 90,
-    y: 50 */
-  },
-  {
-    id: "2",
-    name: "Armored Titan",
-    picture: IMG3,
-    attacks: [
-      { id: 0, name: "Melee Fight", power: 7 },
-      { id: 1, name: "Intelligence", power: 6 },
-      { id: 2, name: "Strength", power: 9 },
-      { id: 3, name: "Armor", power: 9 },
-      { id: 4, name: "Armored Assault", power: 10 },
-    ],
-    x: randomFromInterval(0, widthMap - canvaDefaultVariables.width),
-    y: randomFromInterval(0, heightWeNeed - canvaDefaultVariables.height),
-    /* x: 130,
-    y: 100 */
-  },
-  {
-    id: "3",
-    name: "Colossal Titan",
-    picture: IMG4,
-    attacks: [
-      { id: 0, name: "Destruction", power: 7 },
-      { id: 1, name: "Intelligence", power: 5 },
-      { id: 2, name: "Strength", power: 8 },
-      { id: 3, name: "Hot Steam", power: 9 },
-      { id: 4, name: "Blast Attack", power: 10 },
-    ],
-    x: randomFromInterval(0, widthMap - canvaDefaultVariables.width),
-    y: randomFromInterval(0, heightWeNeed - canvaDefaultVariables.height),
-    /* x: 130,
-    y: 125 */
-  },
-  {
-    id: "4",
-    name: "Beast Titan",
-    picture: IMG5,
-    attacks: [
-      { id: 0, name: "Melee fight", power: 7 },
-      { id: 1, name: "Intelligence", power: 9 },
-      { id: 2, name: "Strength", power: 7 },
-      { id: 3, name: "Titan Control", power: 9 },
-      { id: 4, name: "Stones", power: 10 },
-    ],
-    x: randomFromInterval(0, widthMap - canvaDefaultVariables.width),
-    y: randomFromInterval(0, heightWeNeed - canvaDefaultVariables.height),
-    /* x: 5,
-    y: 120 */
-  },
-  {
-    id: "5",
-    name: "War Hammer Titan",
-    picture: IMG6,
-    attacks: [
-      { id: 0, name: "Melee fight", power: 8 },
-      { id: 1, name: "Intelligence", power: 6 },
-      { id: 2, name: "Strength", power: 8 },
-      { id: 3, name: "Armored Weapons", power: 10 },
-      { id: 4, name: "Tines Attack ", power: 10 },
-    ],
-    x: randomFromInterval(0, widthMap - canvaDefaultVariables.width),
-    y: randomFromInterval(0, heightWeNeed - canvaDefaultVariables.height),
-    /* x: 250,
-    y: 120 */
-  },
-  {
-    id: "6",
-    name: "Jaw Titan",
-    picture: IMG7,
-    attacks: [
-      { id: 0, name: "Melee fight", power: 7 },
-      { id: 1, name: "Speed", power: 9 },
-      { id: 2, name: "Strength", power: 5 },
-      { id: 3, name: "Claws", power: 9 },
-      { id: 4, name: "Jaw Attack", power: 9 },
-    ],
-    x: randomFromInterval(0, widthMap - canvaDefaultVariables.width),
-    y: randomFromInterval(0, heightWeNeed - canvaDefaultVariables.height),
-    /* x: 250,
-    y: 10 */
-  },
-  {
-    id: "7",
-    name: "Cart Titan",
-    picture: IMG8,
-    attacks: [
-      { id: 0, name: "Melee fight", power: 6 },
-      { id: 1, name: "Speed", power: 8 },
-      { id: 2, name: "Stamina", power: 8 },
-      { id: 3, name: "Intelligence", power: 8 },
-      { id: 4, name: "Amo Attack", power: 9 },
-    ],
-    x: randomFromInterval(0, widthMap - canvaDefaultVariables.width),
-    y: randomFromInterval(0, heightWeNeed - canvaDefaultVariables.height),
-    /* x: 260,
-    y: 70 */
-  },
-];
 
 
-function App() {
+
+function App({canvaDefaultVariables, charactersData, heightWeNeed, widthMap}) {
 
   const [charactersShowing, setCharactersShowing] = useState(true);
 
@@ -226,7 +63,14 @@ function App() {
   const [showResults, setShowResults] = useState(false);
   
   const [showCanvaMap, setShowCanvaMap] = useState(false);
-  const [canvas, setCanvas] = useState(canvaDefaultVariables);
+  const [canvas, setCanvas] = useState({
+    x: 3,
+    y: 3,
+    width: 60,
+    height: 50,
+    speedX: 0,
+    speedY: 0,
+  });
 
   //endpoint consumption
   const join = () => {
@@ -236,7 +80,7 @@ function App() {
           res.text()
             .then((res) => {
               playerId = res
-              console.log(playerId)
+              //console.log(playerId)
               //shows the id
             })
         }
@@ -271,16 +115,18 @@ function App() {
       .then((res) => {
         if (res.ok){
           res.json()
-            .then(({enemies}) => {        
-              enemies.forEach((enemie) => {
+            .then(({enemies}) => {     
+              console.log(enemies)
+              console.log(charactersData) 
+              enemies.forEach((enemy) => {
                 for (let i = 0; i < charactersData.length; i++) {
                   if (enemies.length >= 1) {
-                    const nameEnemy = enemie.titan.name
+                    const nameEnemy = enemy.titan.name
                     if (nameEnemy === charactersData[i].name) {
                       enemiesImagesArray.push({
                         pic: charactersData[i].picture, 
-                        x: charactersData[i].x, 
-                        y: charactersData[i].y, 
+                        x: enemy.x, //it could work if if I put enemie.x instead of charactersData[i].x
+                        y: enemy.y, 
                         name: charactersData[i].name, 
                         id: charactersData[i].id
                       })
@@ -299,14 +145,12 @@ function App() {
     }
   }, [characterSelected])
 
-  const updateUserPosition = () => {
-    
+  const updateUserPosition = () => {    
     for (let i of charactersData) {
       if (i.name === userCharacterName) {
         return [i.x, i.y]
       }      
     }
-    
   }
 
   const charactersHidding = () => {
@@ -353,7 +197,14 @@ function App() {
     setAttackSelected4(false);
     setShowCanvaMap(false);
     setShowResults(false);
-    setCanvas(canvaDefaultVariables);
+    setCanvas({
+      x: 3,
+      y: 3,
+      width: 60,
+      height: 50,
+      speedX: 0,
+      speedY: 0,
+    });
     setEnemySelected(false);
     userAttacksArray = [];
   };

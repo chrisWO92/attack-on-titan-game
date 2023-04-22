@@ -175,7 +175,9 @@ const Map = ({
   useEffect(() => {
     document.addEventListener("keydown", keyPressed);
     document.addEventListener("keyup", stop);
-    
+    console.log('enemiesImagesArray: ', enemiesImagesArray)
+    console.log('enemyIMG: ', enemyIMG)
+    //drawEnemies();
   }, []);
 
   useEffect(() => {
