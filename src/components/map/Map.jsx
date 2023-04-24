@@ -36,7 +36,8 @@ const Map = ({
   //sendPosition,
   userCharacterName,
   heightWeNeed,
-  widthMap
+  widthMap,
+  enemyIndex
 }) => {
   const canvasRef = useRef();
 
@@ -244,7 +245,6 @@ const Map = ({
       return;
     }
     setEnemySelected(true);
-    setEnemyIndex(enemy.id);
     setEnemyName(enemy.titan.name);
   };
 
