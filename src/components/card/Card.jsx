@@ -16,7 +16,6 @@ const Card = ({
 
   const characterSelection = () => {
     setUserCharacterName(name);
-    //selectTitan(userCharacterName)
     setCharacterSelected(true);
     setCharAttacks(attacks);
     setUserId(index);

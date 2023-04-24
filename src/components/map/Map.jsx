@@ -348,7 +348,9 @@ const Map = ({
             <button
               id="up"
               className="move-button"
+              onTouchStart={() => move("up")}
               onMouseDown={() => move("up")}
+              onTouchEnd={stop}
               onMouseUp={stop}
             >
               <AiOutlineArrowUp />
@@ -358,7 +360,9 @@ const Map = ({
             <button
               id="left"
               className="move-button"
+              onTouchStart={() => move("left")}
               onMouseDown={() => move("left")}
+              onTouchEnd={stop}
               onMouseUp={stop}
             >
               <AiOutlineArrowLeft />
@@ -366,7 +370,9 @@ const Map = ({
             <button
               id="down"
               className="move-button"
+              onTouchStart={() => move("down")}
               onMouseDown={() => move("down")}
+              onTouchEnd={stop}
               onMouseUp={stop}
             >
               <AiOutlineArrowDown />
@@ -374,7 +380,9 @@ const Map = ({
             <button
               id="right"
               className="move-button"
+              onTouchStart={() => move("right")}
               onMouseDown={() => move("right")}
+              onTouchEnd={stop}
               onMouseUp={stop}
             >
               <AiOutlineArrowRight />
