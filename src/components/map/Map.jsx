@@ -16,6 +16,7 @@ import { AiOutlineArrowDown } from "react-icons/ai";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
 let interval;
+let enemiesArr = []
 
 const Map = ({
   charactersShowing,
@@ -31,7 +32,8 @@ const Map = ({
   enemyName,
   enemySelected,
   setEnemySelected,
-  sendPosition,
+  playerId,
+  //sendPosition,
   userCharacterName,
   heightWeNeed,
   widthMap
@@ -40,6 +42,7 @@ const Map = ({
 
   const [isMouseHolding, setIsMouseHolding] = useState(false);
   const [order, setOrder] = useState("");
+  //const [enemiesArr, setEnemiesArr] = useState([])
 
   let mapBG = new Image();
   mapBG.src = mapBGsrc;
@@ -82,38 +85,144 @@ const Map = ({
     enemyIMG.push(img);
   }
 
-  const drawEnemies = () => {
-    const map = canvasRef.current;
-    const lienzo = map.getContext("2d");
-    for (let i = 0; i < enemyIMG.length; i++) {
-      lienzo.drawImage(
-        enemyIMG[i],
-        enemiesImagesArray[i].x,
-        enemiesImagesArray[i].y,
-        canvas.width,
-        canvas.height
-      );
-    }
-  };
-
   const drawCanvas = () => {
     const map = canvasRef.current;
     map.width = widthMap;
     map.height = heightWeNeed;
     const lienzo = map.getContext("2d");
+    lienzo.drawImage(mapBG, 0, 0, map.width, map.height);
+  };
+
+  const drawUser = () => {
+    const map = canvasRef.current;
+    const lienzo = map.getContext("2d");
     canvas.x = canvas.x + canvas.speedX;
     canvas.y = canvas.y + canvas.speedY;
-    lienzo.clearRect(0, 0, map.width, map.height);
-    lienzo.drawImage(mapBG, 0, 0, map.width, map.height);
     lienzo.drawImage(
       charIMG,
       canvas.x, 
       canvas.y, 
       canvas.width, 
       canvas.height
-      );
-    sendPosition(canvas.x, canvas.y);
+    );
   };
+
+  const drawEnemy = (enemy) => {
+    const map = canvasRef.current;
+    const lienzo = map.getContext("2d");
+    //lienzo.clearRect(0, 0, map.width, map.height);
+    lienzo.drawImage(
+      enemy.pic,
+      enemy.x,
+      enemy.y,
+      canvas.width,
+      canvas.height
+    );
+  };
+
+  const drawEnemies = () => {
+    const map = canvasRef.current;
+    const lienzo = map.getContext("2d");
+    //lienzo.clearRect(0, 0, map.width, map.height);
+    for (let i = 0; i < enemiesArr.length; i++) {
+      let img = new Image()
+      img.src = enemiesArr[i].pic
+      lienzo.drawImage(
+        img,
+        enemiesArr[i].x,
+        enemiesArr[i].y,
+        canvas.width,
+        canvas.height
+      );
+    }
+  };
+
+  const clearCanvas = () => {
+    const map = canvasRef.current;
+    const lienzo = map.getContext("2d");
+    lienzo.clearRect(0, 0, map.width, map.height);
+  };
+
+  useEffect(() => {
+    drawCanvas()
+    sendEnemiesPosition(canvas.x, canvas.y)
+    drawEnemies()
+    console.log('enemiesArr')
+    console.log(enemiesArr)
+    for (let i = 0; i < enemiesArr.length; i++) {
+      if (canvas.speedX !==0 || canvas.speedY !==0) {
+        colission(enemiesArr[i]);
+      }
+    }
+  });
+
+  useEffect(() => {
+    drawCanvas();
+    drawUser();
+    drawEnemies()
+    sendEnemiesPosition(canvas.x, canvas.y)
+  }, [canvas]);
+
+  const sendEnemiesPosition = (x, y) => {
+    fetch(`http://localhost:8080/attack-on-titan/${playerId}/enemiesposition`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        x,
+        y
+      })
+    })
+      .then((res) => {
+        if (res.ok){
+          res.json()
+            .then(({enemies}) => {
+              enemiesArr = enemies
+              console.log(enemies)
+            })
+        }
+      })
+  }
+
+  const sendUserPosition = (x, y) => {
+    fetch(`http://localhost:8080/attack-on-titan/${playerId}/userposition`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        x,
+        y
+      })
+    })
+      .then((res) => {
+        if (res.ok){
+          res.json()
+            .then(({user}) => {      
+              console.log(user)             
+                for (let i = 0; i < charactersData.length; i++) {
+                  if (user !== null) {
+                    const nameEnemy = user[0].titan.name
+                    if (nameEnemy === charactersData[i].name) {
+                      let img = new Image()
+                      img.src = charactersData[i].picture
+                      let userArray = []
+                      userArray = {
+                        pic: img, 
+                        x: user[0].x,
+                        y: user[0].y, 
+                        name: charactersData[i].name, 
+                        id: charactersData[i].id
+                      }
+                      drawEnemy(userArray)                      
+                    }
+                  }
+                }
+            })
+        }
+      })
+  }
 
   const colission = (enemy) => {
     const bottomSideCharacter = canvas.y + canvas.height;
@@ -136,7 +245,7 @@ const Map = ({
     }
     setEnemySelected(true);
     setEnemyIndex(enemy.id);
-    setEnemyName(charactersData[enemy.id].name);
+    setEnemyName(enemy.titan.name);
   };
 
   const repeat = (what) => {
@@ -162,22 +271,27 @@ const Map = ({
     }
   };
 
-  useEffect(() => {
-    drawCanvas();
-    drawEnemies();
-    if (canvas.speedX || canvas.speedY) {
-      for (let i = 0; i < enemiesImagesArray.length; i++) {
-        colission(enemiesImagesArray[i]);
-      }
-    }
-  });
+  const move = (or) => {
+    setIsMouseHolding(true);
+    setOrder(or);
+  };
+
+  function stop() {
+    setOrder("");
+    setIsMouseHolding(false);
+    clearInterval(interval);
+    setCanvas((canvas) => ({
+      ...canvas,
+      speedX: 0,
+      speedY: 0,
+    }));
+  }
+
 
   useEffect(() => {
     document.addEventListener("keydown", keyPressed);
     document.addEventListener("keyup", stop);
-    console.log('enemiesImagesArray: ', enemiesImagesArray)
-    console.log('enemyIMG: ', enemyIMG)
-    //drawEnemies();
+    drawCanvas();
   }, []);
 
   useEffect(() => {
@@ -214,23 +328,8 @@ const Map = ({
     } else {
       stop();
     }
+    
   }, [isMouseHolding]);
-
-  const move = (or) => {
-    setIsMouseHolding(true);
-    setOrder(or);
-  };
-
-  function stop() {
-    setOrder("");
-    setIsMouseHolding(false);
-    clearInterval(interval);
-    setCanvas((canvas) => ({
-      ...canvas,
-      speedX: 0,
-      speedY: 0,
-    }));
-  }
 
   return (
     <>

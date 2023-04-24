@@ -5,28 +5,16 @@ import Characters from "./components/characters/Characters";
 import ImageBg from "./components/ImageBg/ImageBg";
 import Map from "./components/map/Map";
 
-import IMG1 from "./assets/attack-on-titan.png";
+/* import IMG1 from "./assets/attack-on-titan.png";
 import IMG2 from "./assets/female-titan.png";
 import IMG3 from "./assets/armored-titan.png";
 import IMG4 from "./assets/colossal-titan.png";
 import IMG5 from "./assets/beast-titan.png";
 import IMG6 from "./assets/warhammer-titan.png";
 import IMG7 from "./assets/jaw-titan.png";
-import IMG8 from "./assets/cart-titan.png";
+import IMG8 from "./assets/cart-titan.png"; */
 import Result from "./components/result/Result";
 import { useEffect } from "react";
-
-/* let canvaDefaultVariables = {
-  x: 3,
-  y: 3,
-  width: 60,
-  height: 50,
-  speedX: 0,
-  speedY: 0,
-}; */
-
-
-
 
 let enemiesImagesArray = []
 
@@ -64,13 +52,13 @@ function App({canvaDefaultVariables, charactersData, heightWeNeed, widthMap}) {
   
   const [showCanvaMap, setShowCanvaMap] = useState(false);
   const [canvas, setCanvas] = useState({
-    x: 3,
-    y: 3,
     width: 60,
     height: 50,
     speedX: 0,
     speedY: 0,
   });
+
+
 
   //endpoint consumption
   const join = () => {
@@ -95,48 +83,11 @@ function App({canvaDefaultVariables, charactersData, heightWeNeed, widthMap}) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        titan: titName
+        titan: titName,
+        img: charactersData[userId].picture
       })
       //now we're not going to use .then becuase we aren't expecting a response, but later on we're going to use it
     })
-  }
-
-  const sendPosition = (x, y) => {
-    fetch(`http://localhost:8080/attack-on-titan/${playerId}/position`, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        x,
-        y
-      })
-    })
-      .then((res) => {
-        if (res.ok){
-          res.json()
-            .then(({enemies}) => {     
-              console.log(enemies)
-              console.log(charactersData) 
-              enemies.forEach((enemy) => {
-                for (let i = 0; i < charactersData.length; i++) {
-                  if (enemies.length >= 1) {
-                    const nameEnemy = enemy.titan.name
-                    if (nameEnemy === charactersData[i].name) {
-                      enemiesImagesArray.push({
-                        pic: charactersData[i].picture, 
-                        x: enemy.x, //it could work if if I put enemie.x instead of charactersData[i].x
-                        y: enemy.y, 
-                        name: charactersData[i].name, 
-                        id: charactersData[i].id
-                      })
-                    }
-                  }
-                }
-              })
-            })
-        }
-      })
   }
 
   useEffect(() => {
@@ -145,24 +96,30 @@ function App({canvaDefaultVariables, charactersData, heightWeNeed, widthMap}) {
     }
   }, [characterSelected])
 
-  const updateUserPosition = () => {    
+
+/*   const updateUserPosition = () => {    
     for (let i of charactersData) {
       if (i.name === userCharacterName) {
         return [i.x, i.y]
       }      
     }
+  } */
+
+  function randomFromInterval(min, max) { // min and max included 
+    return (Math.random() * (max - min + 1) + min)
   }
 
   const charactersHidding = () => {
+    console.log(charactersData)
     if (characterSelected) {
       setCharactersShowing(false);
       setShowCanvaMap(true);
       selectTitan(userCharacterName)
-      let position = updateUserPosition();
+      //let position = updateUserPosition();
       setCanvas((canvas) => ({
         ...canvas,
-        x: position[0],
-        y: position[1]
+        x: randomFromInterval(0, widthMap - canvas.width),
+        y: randomFromInterval(0, heightWeNeed - canvas.height)
       }));
     }
   };
@@ -243,7 +200,8 @@ function App({canvaDefaultVariables, charactersData, heightWeNeed, widthMap}) {
         enemyName={enemyName}
         enemySelected={enemySelected}
         setEnemySelected={setEnemySelected}
-        sendPosition={sendPosition}
+        playerId={playerId}
+        //sendPosition={sendPosition}
         userCharacterName={userCharacterName}
         heightWeNeed={heightWeNeed}
         widthMap={widthMap}
