@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/attack-on-titan-game/static/css/main.861c9964.css",
+    "main.js": "/attack-on-titan-game/static/js/main.3cf29f4b.js",
+    "static/media/colossal-titan.png": "/attack-on-titan-game/static/media/colossal-titan.2bc5a5c4d2530ec262cf.png",
+    "static/media/beast-titan.png": "/attack-on-titan-game/static/media/beast-titan.9efca6a3d085adcf8b9e.png",
+    "static/media/desktop-background.png": "/attack-on-titan-game/static/media/desktop-background.fedab791bec65788808c.png",
+    "static/media/armored-titan.png": "/attack-on-titan-game/static/media/armored-titan.22cf603dac9ac8567249.png",
+    "static/media/attack-on-titan.png": "/attack-on-titan-game/static/media/attack-on-titan.273c059bc0e99dadb251.png",
+    "static/media/mobile-background.png": "/attack-on-titan-game/static/media/mobile-background.992931c857654d60360f.png",
+    "static/media/female-titan.png": "/attack-on-titan-game/static/media/female-titan.640aadc75c9361f83a8e.png",
+    "static/media/jaw-titan.png": "/attack-on-titan-game/static/media/jaw-titan.af44bd317408c2d11732.png",
+    "static/media/cart-titan.png": "/attack-on-titan-game/static/media/cart-titan.c9938950e55f9956c8c3.png",
+    "static/media/warhammer-titan.png": "/attack-on-titan-game/static/media/warhammer-titan.89fd8731d3f3bae51048.png",
+    "index.html": "/attack-on-titan-game/index.html",
+    "main.861c9964.css.map": "/attack-on-titan-game/static/css/main.861c9964.css.map",
+    "main.3cf29f4b.js.map": "/attack-on-titan-game/static/js/main.3cf29f4b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.861c9964.css",
+    "static/js/main.3cf29f4b.js"
+  ]
+}
